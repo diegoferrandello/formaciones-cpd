@@ -52,7 +52,7 @@ const Formacion = sequelize.define('Formacion', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   titulo: { type: DataTypes.STRING, allowNull: false },
   descripcion: { type: DataTypes.TEXT },
-  tipo: { type: DataTypes.ENUM('producto', 'tecnica_venta', 'perfect_store', 'protocolo', 'lanzamiento', 'otro'), defaultValue: 'producto' },
+  tipo: { type: DataTypes.ENUM('producto', 'tecnica_venta', 'lanzamiento', 'otro'), defaultValue: 'producto' },
   fecha: { type: DataTypes.DATEONLY, allowNull: false },
   hora_inicio: { type: DataTypes.TIME },
   hora_fin: { type: DataTypes.TIME },
