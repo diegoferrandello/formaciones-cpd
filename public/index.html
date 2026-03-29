@@ -905,6 +905,9 @@ const Icons = {
 };
 
 const TIPOS = { producto: 'Producto', tecnica_venta: 'Técnica de Venta', lanzamiento: 'Lanzamiento', otro: 'Otro' };
+const CANALES = { call_center: 'Call Center', directo: 'Directo', directo_indirecto: 'Directo/Indirecto', drogueria: 'Droguería', hys: 'H&S', indirecto: 'Indirecto', interno_loreal: "Interno L'Oréal", interno_pharmexx: 'Interno Pharmexx', perfumeria: 'Perfumería' };
+const MODALIDADES = { express: 'Express', presencial: 'Presencial', virtual: 'Virtual' };
+const CATEGORIAS_OPCIONES = ['Hair Care', 'Hair Color', 'Make Up', 'Skin Care'];
 const ESTADOS = { planificada: 'Planificada', confirmada: 'Confirmada', realizada: 'Realizada', cancelada: 'Cancelada' };
 const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 const DIAS = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
@@ -963,7 +966,7 @@ function LoginScreen({ onLogin }) {
 
 // ─── FORMACION MODAL ───
 function FormacionModal({ show, onClose, onSave, formacion, users, currentUser }) {
-  const emptyForm = { titulo: '', descripcion: '', tipo: 'producto', fecha: new Date().toISOString().split('T')[0], hora_inicio: '09:00', hora_fin: '11:00', cadena: '', pdv_nombre: '', pdv_direccion: '', ciudad: '', estado: 'planificada', asistentes_esperados: '', notas: '', formador_id: currentUser?.id };
+  const emptyForm = { titulo: '', descripcion: '', tipo: 'producto', canal: '', modalidad: '', categorias: [], fecha: new Date().toISOString().split('T')[0], hora_inicio: '09:00', hora_fin: '11:00', cadena: '', pdv_nombre: '', pdv_direccion: '', ciudad: '', estado: 'planificada', asistentes_esperados: '', notas: '', formador_id: currentUser?.id };
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
 
@@ -1014,6 +1017,31 @@ function FormacionModal({ show, onClose, onSave, formacion, users, currentUser }
               <select className="form-select" value={form.estado} onChange={e => set('estado', e.target.value)}>
                 {Object.entries(ESTADOS).map(([k,v]) => <option key={k} value={k}>{v}</option>)}
               </select>
+            </div>
+            <div className="form-group">
+              <label className="form-label">Canal</label>
+              <select className="form-select" value={form.canal || ''} onChange={e => set('canal', e.target.value)}>
+                <option value="">Seleccionar...</option>
+                {Object.entries(CANALES).map(([k,v]) => <option key={k} value={k}>{v}</option>)}
+              </select>
+            </div>
+            <div className="form-group">
+              <label className="form-label">Modalidad</label>
+              <select className="form-select" value={form.modalidad || ''} onChange={e => set('modalidad', e.target.value)}>
+                <option value="">Seleccionar...</option>
+                {Object.entries(MODALIDADES).map(([k,v]) => <option key={k} value={k}>{v}</option>)}
+              </select>
+            </div>
+            <div className="form-group full">
+              <label className="form-label">Categorías</label>
+              <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginTop:'4px'}}>
+                {CATEGORIAS_OPCIONES.map(cat => (
+                  <label key={cat} style={{display:'flex',alignItems:'center',gap:'6px',cursor:'pointer',fontSize:'14px',padding:'6px 12px',borderRadius:'20px',border:'1px solid var(--border)',background:(form.categorias||[]).includes(cat)?'var(--accent)':'var(--surface)',color:(form.categorias||[]).includes(cat)?'#fff':'var(--text-secondary)',transition:'all 0.15s ease',fontWeight:500}}>
+                    <input type="checkbox" checked={(form.categorias||[]).includes(cat)} onChange={e => { const cats = form.categorias || []; set('categorias', e.target.checked ? [...cats, cat] : cats.filter(c => c !== cat)); }} style={{display:'none'}} />
+                    {cat}
+                  </label>
+                ))}
+              </div>
             </div>
             <div className="form-group">
               <label className="form-label">Fecha *</label>
@@ -1118,6 +1146,18 @@ function DetailModal({ show, formacion, onClose, onEdit, onDelete, onUploadFotos
               <div className="detail-icon"><Icons.Tag /></div>
               <div><div className="detail-label">Tipo</div><div className="detail-value">{TIPOS[f.tipo]}</div></div>
             </div>
+            {f.canal && <div className="detail-row">
+              <div className="detail-icon"><Icons.Tag /></div>
+              <div><div className="detail-label">Canal</div><div className="detail-value">{CANALES[f.canal] || f.canal}</div></div>
+            </div>}
+            {f.modalidad && <div className="detail-row">
+              <div className="detail-icon"><Icons.Tag /></div>
+              <div><div className="detail-label">Modalidad</div><div className="detail-value">{MODALIDADES[f.modalidad] || f.modalidad}</div></div>
+            </div>}
+            {f.categorias && f.categorias.length > 0 && <div className="detail-row">
+              <div className="detail-icon"><Icons.Tag /></div>
+              <div><div className="detail-label">Categorías</div><div className="detail-value" style={{display:'flex',gap:'6px',flexWrap:'wrap'}}>{f.categorias.map(c => <span key={c} style={{padding:'3px 10px',borderRadius:'12px',fontSize:'12px',background:'var(--accent-gold-light)',color:'var(--accent-gold)',fontWeight:600}}>{c}</span>)}</div></div>
+            </div>}
             <div className="detail-row">
               <div className="detail-icon"><Icons.User /></div>
               <div><div className="detail-label">Formador</div><div className="detail-value">{f.formador?.nombre || '—'}</div></div>
