@@ -278,6 +278,53 @@ app.get('/api/stats', authMiddleware, async (req, res) => {
   }
 });
 
+// ─── EXPORT CSV ───
+app.get('/api/export', authMiddleware, async (req, res) => {
+  try {
+    const { mes, anio, formador_id, estado } = req.query;
+    const where = {};
+    if (mes && anio) {
+      const start = new Date(anio, mes - 1, 1);
+      const end = new Date(anio, mes, 0);
+      where.fecha = { [Op.between]: [start.toISOString().split('T')[0], end.toISOString().split('T')[0]] };
+    }
+    if (formador_id) where.formador_id = formador_id;
+    if (estado) where.estado = estado;
+
+    const formaciones = await Formacion.findAll({
+      where,
+      include: [{ model: User, as: 'formador', attributes: ['nombre', 'email'] }],
+      order: [['fecha', 'ASC'], ['hora_inicio', 'ASC']]
+    });
+
+    const rows = formaciones.map(f => ({
+      Titulo: f.titulo,
+      Tipo: f.tipo,
+      Canal: f.canal || '',
+      Modalidad: f.modalidad || '',
+      Categorias: (f.categorias || []).join(', '),
+      Fecha: f.fecha,
+      'Hora Inicio': f.hora_inicio || '',
+      'Hora Fin': f.hora_fin || '',
+      Estado: f.estado,
+      Formador: f.formador?.nombre || '',
+      'Email Formador': f.formador?.email || '',
+      Cadena: f.cadena || '',
+      PDV: f.pdv_nombre || '',
+      Direccion: f.pdv_direccion || '',
+      Ciudad: f.ciudad || '',
+      'Asistentes Esperados': f.asistentes_esperados || '',
+      'Asistentes Reales': f.asistentes_reales || '',
+      Descripcion: f.descripcion || '',
+      Notas: f.notas || ''
+    }));
+
+    res.json(rows);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // ─── SERVE FRONTEND ───
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
