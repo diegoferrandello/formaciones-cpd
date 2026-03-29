@@ -1264,6 +1264,7 @@ function App() {
   const [showDetail, setShowDetail] = useState(false);
   const [showUserModal, setShowUserModal] = useState(false);
   const [filterEstado, setFilterEstado] = useState('');
+  const [filterFormador, setFilterFormador] = useState('');
   const [toast, setToast] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -1275,10 +1276,11 @@ function App() {
       const y = currentDate.getFullYear();
       const params = { mes: m, anio: y };
       if (filterEstado) params.estado = filterEstado;
+      if (filterFormador) params.formador_id = filterFormador;
       const data = await API.getFormaciones(params);
       setFormaciones(data);
     } catch (e) { console.error(e); }
-  }, [currentDate, filterEstado]);
+  }, [currentDate, filterEstado, filterFormador]);
 
   const loadUsers = async () => {
     try { const data = await API.getUsers(); setUsers(data); } catch (e) {}
@@ -1293,7 +1295,7 @@ function App() {
     } catch (e) {}
   };
 
-  useEffect(() => { if (user) { loadFormaciones(); loadUsers(); } }, [user, currentDate, filterEstado]);
+  useEffect(() => { if (user) { loadFormaciones(); loadUsers(); } }, [user, currentDate, filterEstado, filterFormador]);
   useEffect(() => { if (user && page === 'estadisticas') loadStats(); }, [page, currentDate]);
 
   const handleSaveFormacion = async (data) => {
@@ -1352,6 +1354,7 @@ function App() {
       const y = currentDate.getFullYear();
       const params = { mes: m, anio: y };
       if (filterEstado) params.estado = filterEstado;
+      if (filterFormador) params.formador_id = filterFormador;
       const token = localStorage.getItem('cpd_token');
       const res = await fetch(`${window.location.origin}/api/export?${new URLSearchParams(params)}`, {
         headers: { 'Authorization': `Bearer ${token}` }
@@ -1525,13 +1528,17 @@ function App() {
                 <button className="btn btn-ghost btn-icon" onClick={() => view === 'month' ? navMonth(1) : view === 'week' ? navWeek(1) : navDay(1)}><Icons.ChevRight /></button>
                 <button className="btn btn-secondary btn-sm" onClick={() => setCurrentDate(new Date())}>Hoy</button>
               </div>
-              <div style={{display:'flex',gap:12,alignItems:'center'}}>
+              <div style={{display:'flex',gap:12,alignItems:'center',flexWrap:'wrap'}}>
                 <div className="calendar-filters">
                   <span className={`filter-chip ${!filterEstado ? 'active' : ''}`} onClick={() => setFilterEstado('')}>Todas</span>
                   {Object.entries(ESTADOS).map(([k,v]) => (
                     <span key={k} className={`filter-chip ${filterEstado === k ? 'active' : ''}`} onClick={() => setFilterEstado(filterEstado === k ? '' : k)}>{v}</span>
                   ))}
                 </div>
+                <select className="form-select" value={filterFormador} onChange={e => setFilterFormador(e.target.value)} style={{padding:'6px 12px',fontSize:'12px',borderRadius:'20px',border:'1px solid var(--border)',minWidth:'160px',fontWeight:500}}>
+                  <option value="">Todos los formadores</option>
+                  {users.filter(u => u.activo !== false).map(u => <option key={u.id} value={u.id}>{u.nombre}</option>)}
+                </select>
                 <div className="view-toggle">
                   <button className={`view-btn ${view === 'month' ? 'active' : ''}`} onClick={() => setView('month')}>Mes</button>
                   <button className={`view-btn ${view === 'week' ? 'active' : ''}`} onClick={() => setView('week')}>Semana</button>
