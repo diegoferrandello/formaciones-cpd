@@ -53,6 +53,9 @@ const Formacion = sequelize.define('Formacion', {
   titulo: { type: DataTypes.STRING, allowNull: false },
   descripcion: { type: DataTypes.TEXT },
   tipo: { type: DataTypes.ENUM('producto', 'tecnica_venta', 'lanzamiento', 'otro'), defaultValue: 'producto' },
+  canal: { type: DataTypes.ENUM('call_center', 'directo', 'directo_indirecto', 'drogueria', 'hys', 'indirecto', 'interno_loreal', 'interno_pharmexx', 'perfumeria'), allowNull: true },
+  modalidad: { type: DataTypes.ENUM('express', 'presencial', 'virtual'), allowNull: true },
+  categorias: { type: DataTypes.JSON, defaultValue: [] },
   fecha: { type: DataTypes.DATEONLY, allowNull: false },
   hora_inicio: { type: DataTypes.TIME },
   hora_fin: { type: DataTypes.TIME },
@@ -185,6 +188,7 @@ app.get('/api/formaciones/:id', authMiddleware, async (req, res) => {
 app.post('/api/formaciones', authMiddleware, async (req, res) => {
   try {
     const data = { ...req.body, creado_por: req.user.id };
+    // Formadores solo pueden crear formaciones para sí mismos
     if (req.user.rol === 'formador') data.formador_id = req.user.id;
     const f = await Formacion.create(data);
     const full = await Formacion.findByPk(f.id, {
@@ -200,6 +204,7 @@ app.put('/api/formaciones/:id', authMiddleware, async (req, res) => {
   try {
     const f = await Formacion.findByPk(req.params.id);
     if (!f) return res.status(404).json({ error: 'No encontrada' });
+    // Formadores solo editan sus propias formaciones
     if (req.user.rol === 'formador' && f.formador_id !== req.user.id) {
       return res.status(403).json({ error: 'Solo podés editar tus formaciones' });
     }
@@ -286,6 +291,7 @@ async function init() {
     await sequelize.sync({ alter: true });
     console.log('✅ Modelos sincronizados');
 
+    // Create default admin if none exists
     const adminCount = await User.count({ where: { rol: 'admin' } });
     if (adminCount === 0) {
       await User.create({
