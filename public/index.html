@@ -967,7 +967,7 @@ function LoginScreen({ onLogin }) {
 
 // ─── FORMACION MODAL ───
 function FormacionModal({ show, onClose, onSave, formacion, users, currentUser }) {
-  const emptyForm = { titulo: '', descripcion: '', tipo: 'producto', canal: '', modalidad: '', categorias: [], fecha: new Date().toISOString().split('T')[0], hora_inicio: '09:00', hora_fin: '11:00', cadena: '', pdv_nombre: '', pdv_direccion: '', ciudad: '', estado: 'planificada', asistentes_esperados: '', notas: '', formador_id: currentUser?.id };
+  const emptyForm = { titulo: '', descripcion: '', tipo: 'producto', canal: '', modalidad: '', link_reunion: '', categorias: [], fecha: new Date().toISOString().split('T')[0], hora_inicio: '09:00', hora_fin: '11:00', cadena: '', pdv_nombre: '', pdv_direccion: '', ciudad: '', estado: 'planificada', asistentes_esperados: '', notas: '', formador_id: currentUser?.id };
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
 
@@ -1033,6 +1033,10 @@ function FormacionModal({ show, onClose, onSave, formacion, users, currentUser }
                 {Object.entries(MODALIDADES).map(([k,v]) => <option key={k} value={k}>{v}</option>)}
               </select>
             </div>
+            {form.modalidad === 'virtual' && <div className="form-group full">
+              <label className="form-label">Link de Reunión (Teams / Zoom / Meet)</label>
+              <input className="form-input" value={form.link_reunion || ''} onChange={e => set('link_reunion', e.target.value)} placeholder="https://teams.microsoft.com/l/meetup-join/..." />
+            </div>}
             <div className="form-group full">
               <label className="form-label">Categorías</label>
               <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginTop:'4px'}}>
@@ -1154,6 +1158,10 @@ function DetailModal({ show, formacion, onClose, onEdit, onDelete, onUploadFotos
             {f.modalidad && <div className="detail-row">
               <div className="detail-icon"><Icons.Tag /></div>
               <div><div className="detail-label">Modalidad</div><div className="detail-value">{MODALIDADES[f.modalidad] || f.modalidad}</div></div>
+            </div>}
+            {f.link_reunion && <div className="detail-row">
+              <div className="detail-icon" style={{background:'var(--info-light)'}}><Icons.Calendar /></div>
+              <div><div className="detail-label">Link de Reunión</div><div className="detail-value"><a href={f.link_reunion} target="_blank" rel="noopener noreferrer" style={{color:'var(--info)',textDecoration:'none',fontWeight:600,display:'inline-flex',alignItems:'center',gap:'6px',padding:'6px 14px',background:'var(--info-light)',borderRadius:'8px',fontSize:'13px'}}>Unirse a la reunión ↗</a></div></div>
             </div>}
             {f.categorias && f.categorias.length > 0 && <div className="detail-row">
               <div className="detail-icon"><Icons.Tag /></div>
@@ -1390,6 +1398,12 @@ function App() {
     setCurrentDate(d);
   };
 
+  const navDay = (dir) => {
+    const d = new Date(currentDate);
+    d.setDate(d.getDate() + dir);
+    setCurrentDate(d);
+  };
+
   if (!user) return <LoginScreen onLogin={setUser} />;
 
   // Calendar helpers
@@ -1506,9 +1520,9 @@ function App() {
           <div className="calendar-container">
             <div className="calendar-header">
               <div className="calendar-nav">
-                <button className="btn btn-ghost btn-icon" onClick={() => view === 'month' ? navMonth(-1) : navWeek(-1)}><Icons.ChevLeft /></button>
-                <div className="calendar-month">{view === 'month' ? `${MESES[month]} ${year}` : getWeekLabel()}</div>
-                <button className="btn btn-ghost btn-icon" onClick={() => view === 'month' ? navMonth(1) : navWeek(1)}><Icons.ChevRight /></button>
+                <button className="btn btn-ghost btn-icon" onClick={() => view === 'month' ? navMonth(-1) : view === 'week' ? navWeek(-1) : navDay(-1)}><Icons.ChevLeft /></button>
+                <div className="calendar-month">{view === 'month' ? `${MESES[month]} ${year}` : view === 'week' ? getWeekLabel() : currentDate.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</div>
+                <button className="btn btn-ghost btn-icon" onClick={() => view === 'month' ? navMonth(1) : view === 'week' ? navWeek(1) : navDay(1)}><Icons.ChevRight /></button>
                 <button className="btn btn-secondary btn-sm" onClick={() => setCurrentDate(new Date())}>Hoy</button>
               </div>
               <div style={{display:'flex',gap:12,alignItems:'center'}}>
@@ -1521,6 +1535,7 @@ function App() {
                 <div className="view-toggle">
                   <button className={`view-btn ${view === 'month' ? 'active' : ''}`} onClick={() => setView('month')}>Mes</button>
                   <button className={`view-btn ${view === 'week' ? 'active' : ''}`} onClick={() => setView('week')}>Semana</button>
+                  <button className={`view-btn ${view === 'day' ? 'active' : ''}`} onClick={() => setView('day')}>Día</button>
                 </div>
               </div>
             </div>
@@ -1585,6 +1600,81 @@ function App() {
                 </div>
               </div>
             )}
+
+            {view === 'day' && (() => {
+              const HOURS = Array.from({ length: 13 }, (_, i) => i + 8);
+              const dayEvents = formaciones.filter(f => {
+                const fd = new Date(f.fecha + 'T12:00:00');
+                return fd.toDateString() === currentDate.toDateString();
+              });
+              const formadores = [...new Map(dayEvents.map(e => [e.formador?.id, e.formador])).values()].filter(Boolean);
+              if (formadores.length === 0 && dayEvents.length === 0) {
+                return (
+                  <div style={{background:'var(--surface)',borderRadius:'var(--radius-lg)',border:'1px solid var(--border-light)',padding:'60px 20px',textAlign:'center',boxShadow:'var(--shadow-sm)'}}>
+                    <div style={{fontSize:'48px',marginBottom:'12px'}}>📭</div>
+                    <div style={{fontSize:'16px',fontWeight:600,color:'var(--text)'}}>Sin formaciones este día</div>
+                    <div style={{fontSize:'13px',color:'var(--text-muted)',marginTop:'6px'}}>Hacé doble click en un día del calendario mensual o creá una nueva formación</div>
+                  </div>
+                );
+              }
+              const allFormadores = users.filter(u => u.activo !== false && (u.rol === 'formador' || dayEvents.some(e => e.formador_id === u.id)));
+              const displayFormadores = allFormadores.length > 0 ? allFormadores : formadores;
+
+              const getEventStyle = (ev) => {
+                const startH = ev.hora_inicio ? parseInt(ev.hora_inicio.split(':')[0]) : 8;
+                const startM = ev.hora_inicio ? parseInt(ev.hora_inicio.split(':')[1]) : 0;
+                const endH = ev.hora_fin ? parseInt(ev.hora_fin.split(':')[0]) : startH + 1;
+                const endM = ev.hora_fin ? parseInt(ev.hora_fin.split(':')[1]) : 0;
+                const top = ((startH - 8) * 60 + startM) * (60/60);
+                const height = Math.max(((endH - startH) * 60 + (endM - startM)) * (60/60), 30);
+                return { top: `${top}px`, height: `${height}px` };
+              };
+
+              const COLORS = ['#2874A6', '#8B6914', '#2D7A4F', '#9B59B6', '#E67E22', '#C0392B'];
+
+              return (
+                <div style={{background:'var(--surface)',borderRadius:'var(--radius-lg)',border:'1px solid var(--border-light)',overflow:'hidden',boxShadow:'var(--shadow-sm)'}}>
+                  <div style={{display:'grid',gridTemplateColumns:`80px repeat(${displayFormadores.length}, 1fr)`,borderBottom:'1px solid var(--border-light)',background:'var(--surface-alt)'}}>
+                    <div style={{padding:'14px 12px',fontSize:'11px',fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--text-muted)'}}>Hora</div>
+                    {displayFormadores.map((f, i) => (
+                      <div key={f.id} style={{padding:'14px 12px',textAlign:'center',borderLeft:'1px solid var(--border-light)'}}>
+                        <div style={{width:'28px',height:'28px',borderRadius:'50%',background:COLORS[i % COLORS.length],display:'inline-flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:'12px',fontWeight:600,marginBottom:'4px'}}>{f.nombre?.charAt(0)}</div>
+                        <div style={{fontSize:'12px',fontWeight:600}}>{f.nombre}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{display:'grid',gridTemplateColumns:`80px repeat(${displayFormadores.length}, 1fr)`,position:'relative'}}>
+                    <div>
+                      {HOURS.map(h => (
+                        <div key={h} style={{height:'60px',padding:'4px 12px',fontSize:'11px',color:'var(--text-muted)',fontWeight:500,borderBottom:'1px solid var(--border-light)',display:'flex',alignItems:'flex-start'}}>{String(h).padStart(2,'0')}:00</div>
+                      ))}
+                    </div>
+                    {displayFormadores.map((f, fi) => {
+                      const fEvents = dayEvents.filter(e => e.formador_id === f.id);
+                      return (
+                        <div key={f.id} style={{position:'relative',borderLeft:'1px solid var(--border-light)'}}>
+                          {HOURS.map(h => (
+                            <div key={h} style={{height:'60px',borderBottom:'1px solid var(--border-light)'}}></div>
+                          ))}
+                          {fEvents.map(ev => {
+                            const pos = getEventStyle(ev);
+                            const bgColors = { planificada: 'var(--info-light)', confirmada: 'var(--warning-light)', realizada: 'var(--success-light)', cancelada: 'var(--danger-light)' };
+                            const borderColors = { planificada: 'var(--planificada)', confirmada: 'var(--confirmada)', realizada: 'var(--realizada)', cancelada: 'var(--cancelada)' };
+                            return (
+                              <div key={ev.id} onClick={() => { setSelectedFormacion(ev); setShowDetail(true); }} style={{position:'absolute',top:pos.top,height:pos.height,left:'4px',right:'4px',background:bgColors[ev.estado],borderLeft:`3px solid ${borderColors[ev.estado]}`,borderRadius:'6px',padding:'6px 8px',cursor:'pointer',overflow:'hidden',fontSize:'11px',transition:'transform 0.1s ease',zIndex:2}} onMouseEnter={e => e.currentTarget.style.transform='scale(1.02)'} onMouseLeave={e => e.currentTarget.style.transform='scale(1)'}>
+                                <div style={{fontWeight:600,fontSize:'11px'}}>{ev.hora_inicio?.slice(0,5)} – {ev.hora_fin?.slice(0,5)}</div>
+                                <div style={{fontWeight:500,marginTop:'2px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{ev.titulo}</div>
+                                {parseFloat(pos.height) > 50 && <div style={{fontSize:'10px',color:'var(--text-muted)',marginTop:'2px'}}>{ev.cadena}{ev.modalidad === 'virtual' ? ' 🖥️' : ''}</div>}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })()}
           </div>
         )}
 
