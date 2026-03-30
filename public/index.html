@@ -833,6 +833,99 @@
     }
     .upload-area:hover { border-color: var(--accent-gold); background: var(--accent-gold-light); }
     .upload-area p { font-size: 13px; color: var(--text-muted); }
+
+    /* ─── MINI CALENDAR ─── */
+    .mini-cal {
+      padding: 12px 14px;
+      margin: 0 12px 8px;
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .mini-cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .mini-cal-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.3px;
+    }
+    .mini-cal-nav {
+      display: flex;
+      gap: 2px;
+    }
+    .mini-cal-nav button {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.4);
+      cursor: pointer;
+      padding: 2px 4px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.12s ease;
+    }
+    .mini-cal-nav button:hover { color: #fff; background: rgba(255,255,255,0.08); }
+    .mini-cal-nav button svg { width: 14px; height: 14px; }
+    .mini-cal-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      margin-bottom: 4px;
+    }
+    .mini-cal-wd {
+      text-align: center;
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: rgba(255,255,255,0.3);
+      padding: 2px 0;
+    }
+    .mini-cal-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+    }
+    .mini-cal-day {
+      text-align: center;
+      font-size: 11px;
+      padding: 4px 0;
+      border-radius: 4px;
+      cursor: pointer;
+      color: rgba(255,255,255,0.55);
+      transition: all 0.12s ease;
+      position: relative;
+      font-weight: 400;
+    }
+    .mini-cal-day:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .mini-cal-day.other { opacity: 0.25; }
+    .mini-cal-day.today {
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+    .mini-cal-day.selected {
+      background: var(--accent-gold);
+      color: #fff;
+      font-weight: 600;
+    }
+    .mini-cal-day.has-events::after {
+      content: '';
+      position: absolute;
+      bottom: 1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent-gold);
+    }
+    .mini-cal-day.selected.has-events::after { background: #fff; }
+    .mini-cal-day.today.has-events::after { background: var(--accent-gold); }
   </style>
 </head>
 <body>
@@ -914,6 +1007,82 @@ const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', '
 const DIAS = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
 // ─── TOAST ───
+// ─── MINI CALENDAR SIDEBAR ───
+function MiniCalendar({ currentDate, onDateSelect, formaciones }) {
+  const [miniDate, setMiniDate] = useState(new Date(currentDate));
+  
+  useEffect(() => { setMiniDate(new Date(currentDate)); }, [currentDate]);
+  
+  const miniYear = miniDate.getFullYear();
+  const miniMonth = miniDate.getMonth();
+  const firstDay = new Date(miniYear, miniMonth, 1);
+  const lastDay = new Date(miniYear, miniMonth + 1, 0);
+  const startOffset = (firstDay.getDay() + 6) % 7;
+  const totalDays = lastDay.getDate();
+  const today = new Date();
+  
+  const days = [];
+  const prevLast = new Date(miniYear, miniMonth, 0).getDate();
+  for (let i = startOffset - 1; i >= 0; i--) days.push({ day: prevLast - i, other: true });
+  for (let d = 1; d <= totalDays; d++) days.push({ day: d, other: false });
+  const remaining = 42 - days.length;
+  for (let d = 1; d <= remaining; d++) days.push({ day: d, other: true });
+  
+  const daysWithEvents = new Set();
+  (formaciones || []).forEach(f => {
+    const fd = new Date(f.fecha + 'T12:00:00');
+    if (fd.getMonth() === miniMonth && fd.getFullYear() === miniYear) {
+      daysWithEvents.add(fd.getDate());
+    }
+  });
+  
+  const selectedDay = currentDate.getDate();
+  const selectedMonth = currentDate.getMonth();
+  const selectedYear = currentDate.getFullYear();
+  
+  const navMini = (dir) => {
+    const d = new Date(miniDate);
+    d.setMonth(d.getMonth() + dir);
+    setMiniDate(d);
+  };
+  
+  const handleDayClick = (d) => {
+    if (d.other) return;
+    const newDate = new Date(miniYear, miniMonth, d.day);
+    onDateSelect(newDate);
+  };
+  
+  const MINI_MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  
+  return (
+    <div className="mini-cal">
+      <div className="mini-cal-header">
+        <div className="mini-cal-title">{MINI_MESES[miniMonth]} {miniYear}</div>
+        <div className="mini-cal-nav">
+          <button onClick={() => navMini(-1)}><Icons.ChevLeft /></button>
+          <button onClick={() => navMini(1)}><Icons.ChevRight /></button>
+        </div>
+      </div>
+      <div className="mini-cal-weekdays">
+        {['Lu','Ma','Mi','Ju','Vi','Sá','Do'].map(d => <div key={d} className="mini-cal-wd">{d}</div>)}
+      </div>
+      <div className="mini-cal-days">
+        {days.map((d, i) => {
+          const isToday = !d.other && d.day === today.getDate() && miniMonth === today.getMonth() && miniYear === today.getFullYear();
+          const isSelected = !d.other && d.day === selectedDay && miniMonth === selectedMonth && miniYear === selectedYear;
+          const hasEvents = !d.other && daysWithEvents.has(d.day);
+          let cls = 'mini-cal-day';
+          if (d.other) cls += ' other';
+          if (isToday) cls += ' today';
+          if (isSelected) cls += ' selected';
+          if (hasEvents) cls += ' has-events';
+          return <div key={i} className={cls} onClick={() => handleDayClick(d)}>{d.day}</div>;
+        })}
+      </div>
+    </div>
+  );
+}
+
 function Toast({ message, type, onClose }) {
   useEffect(() => { const t = setTimeout(onClose, 3000); return () => clearTimeout(t); }, []);
   return <div className={`toast ${type}`}>{message}</div>;
@@ -1487,6 +1656,7 @@ function App() {
             </div>
           )}
         </div>
+        <MiniCalendar currentDate={currentDate} onDateSelect={(d) => { setCurrentDate(d); setPage('calendario'); }} formaciones={formaciones} />
         <div className="sidebar-footer">
           <div className="user-info">
             <div className="user-avatar">{user.nombre?.charAt(0)}</div>
