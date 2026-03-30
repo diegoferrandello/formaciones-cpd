@@ -926,6 +926,74 @@
     }
     .mini-cal-day.selected.has-events::after { background: #fff; }
     .mini-cal-day.today.has-events::after { background: var(--accent-gold); }
+
+    /* ─── SIDEBAR STATS ─── */
+    .sidebar-stats {
+      padding: 0 12px;
+      margin-bottom: 10px;
+    }
+    .sidebar-stats-title {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.3);
+      padding: 0 14px;
+      margin-bottom: 8px;
+    }
+    .sidebar-stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .sidebar-stat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      text-align: center;
+    }
+    .sidebar-stat-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+    .sidebar-stat-val.gold { color: var(--accent-gold); }
+    .sidebar-stat-val.green { color: #5ABE82; }
+    .sidebar-stat-val.blue { color: #5DADE2; }
+    .sidebar-stat-val.amber { color: #D4AC0D; }
+    .sidebar-stat-lbl {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 4px;
+    }
+    .sidebar-stat.full {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+    }
+    .sidebar-stat.full .sidebar-stat-lbl { margin-top: 0; }
+    .sidebar-progress {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .sidebar-progress-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent-gold), #5ABE82);
+      transition: width 0.4s ease;
+    }
   </style>
 </head>
 <body>
@@ -1007,6 +1075,58 @@ const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', '
 const DIAS = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
 // ─── TOAST ───
+// ─── SIDEBAR STATS ───
+function SidebarStats({ formaciones, currentDate }) {
+  const month = currentDate.getMonth();
+  const year = currentDate.getFullYear();
+  
+  const monthFormaciones = (formaciones || []).filter(f => {
+    const fd = new Date(f.fecha + 'T12:00:00');
+    return fd.getMonth() === month && fd.getFullYear() === year;
+  });
+  
+  const total = monthFormaciones.length;
+  const realizadas = monthFormaciones.filter(f => f.estado === 'realizada').length;
+  const confirmadas = monthFormaciones.filter(f => f.estado === 'confirmada').length;
+  const planificadas = monthFormaciones.filter(f => f.estado === 'planificada').length;
+  const pct = total > 0 ? Math.round(realizadas / total * 100) : 0;
+  
+  const MINI_MESES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  
+  return (
+    <div className="sidebar-stats">
+      <div className="sidebar-stats-title">Resumen {MINI_MESES[month]}</div>
+      <div className="sidebar-stats-grid">
+        <div className="sidebar-stat">
+          <div className="sidebar-stat-val gold">{total}</div>
+          <div className="sidebar-stat-lbl">Total</div>
+        </div>
+        <div className="sidebar-stat">
+          <div className="sidebar-stat-val green">{realizadas}</div>
+          <div className="sidebar-stat-lbl">Realizadas</div>
+        </div>
+        <div className="sidebar-stat">
+          <div className="sidebar-stat-val amber">{confirmadas}</div>
+          <div className="sidebar-stat-lbl">Confirmadas</div>
+        </div>
+        <div className="sidebar-stat">
+          <div className="sidebar-stat-val blue">{planificadas}</div>
+          <div className="sidebar-stat-lbl">Planificadas</div>
+        </div>
+        <div className="sidebar-stat full">
+          <div className="sidebar-stat-lbl">Cumplimiento</div>
+          <div className="sidebar-stat-val gold" style={{fontSize:'16px'}}>{pct}%</div>
+        </div>
+        <div style={{gridColumn:'1 / -1', padding:'0 2px'}}>
+          <div className="sidebar-progress">
+            <div className="sidebar-progress-fill" style={{width: `${pct}%`}}></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── MINI CALENDAR SIDEBAR ───
 function MiniCalendar({ currentDate, onDateSelect, formaciones }) {
   const [miniDate, setMiniDate] = useState(new Date(currentDate));
@@ -1656,6 +1776,7 @@ function App() {
             </div>
           )}
         </div>
+        <SidebarStats formaciones={formaciones} currentDate={currentDate} />
         <MiniCalendar currentDate={currentDate} onDateSelect={(d) => { setCurrentDate(d); setPage('calendario'); }} formaciones={formaciones} />
         <div className="sidebar-footer">
           <div className="user-info">
