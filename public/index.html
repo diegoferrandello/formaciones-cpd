@@ -7,6 +7,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -201,7 +202,8 @@
       background: var(--accent);
       color: #fff;
     }
-    .btn-primary:hover { background: #1a1714; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .btn-primary:hover { background: #1a1714; transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-primary:active { transform: translateY(0); }
 
     .btn-secondary {
       background: var(--surface);
@@ -270,8 +272,8 @@
       background: var(--surface);
       color: var(--text-secondary);
     }
-    .filter-chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .filter-chip:hover:not(.active) { border-color: var(--text-muted); }
+    .filter-chip.active { background: var(--accent); color: #fff; border-color: var(--accent); transform: scale(1.05); }
+    .filter-chip:hover:not(.active) { border-color: var(--text-muted); transform: translateY(-1px); }
 
     .view-toggle {
       display: flex;
@@ -300,7 +302,9 @@
       border: 1px solid var(--border-light);
       overflow: hidden;
       box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.3s ease;
     }
+    .calendar-grid:hover { box-shadow: var(--shadow-md); }
 
     .calendar-weekdays {
       display: grid;
@@ -362,7 +366,7 @@
       text-overflow: ellipsis;
       transition: transform 0.1s ease;
     }
-    .day-event:hover { transform: scale(1.02); }
+    .day-event:hover { transform: scale(1.03) translateY(-1px); box-shadow: var(--shadow-sm); }
 
     .day-event.planificada { background: var(--info-light); color: var(--planificada); border-left: 3px solid var(--planificada); }
     .day-event.confirmada { background: var(--warning-light); color: var(--confirmada); border-left: 3px solid var(--confirmada); }
@@ -435,7 +439,7 @@
       cursor: pointer;
       transition: transform 0.1s ease;
     }
-    .weekly-event:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+    .weekly-event:hover { transform: translateY(-2px) scale(1.01); box-shadow: var(--shadow-md); }
 
     .weekly-event.planificada { background: var(--info-light); border-left: 3px solid var(--planificada); }
     .weekly-event.confirmada { background: var(--warning-light); border-left: 3px solid var(--confirmada); }
@@ -460,7 +464,7 @@
     }
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(20px) scale(0.95); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
 
     .modal {
       background: var(--surface);
@@ -634,7 +638,9 @@
       border-radius: var(--radius);
       padding: 20px;
       box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
     }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
 
     .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; }
     .stat-value { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; margin-top: 6px; }
@@ -1001,6 +1007,89 @@
 <script type="text/babel">
 const { useState, useEffect, useCallback, useRef } = React;
 
+// ─── GSAP ANIMATIONS ───
+const gsapAnimate = {
+  // Fade in + slide up elements with stagger
+  staggerIn: (selector, delay = 0) => {
+    setTimeout(() => {
+      const els = document.querySelectorAll(selector);
+      if (!els.length) return;
+      gsap.fromTo(els, 
+        { opacity: 0, y: 20 }, 
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out' }
+      );
+    }, delay);
+  },
+  // Fade in single element
+  fadeIn: (selector, delay = 0) => {
+    setTimeout(() => {
+      const el = document.querySelector(selector);
+      if (!el) return;
+      gsap.fromTo(el, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+    }, delay);
+  },
+  // Scale in from center
+  scaleIn: (selector, delay = 0) => {
+    setTimeout(() => {
+      const els = document.querySelectorAll(selector);
+      if (!els.length) return;
+      gsap.fromTo(els, 
+        { opacity: 0, scale: 0.85 }, 
+        { opacity: 1, scale: 1, duration: 0.4, stagger: 0.06, ease: 'back.out(1.4)' }
+      );
+    }, delay);
+  },
+  // Slide in from left
+  slideLeft: (selector, delay = 0) => {
+    setTimeout(() => {
+      const el = document.querySelector(selector);
+      if (!el) return;
+      gsap.fromTo(el, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' });
+    }, delay);
+  },
+  // Count up numbers
+  countUp: (selector, target, delay = 0) => {
+    setTimeout(() => {
+      const el = document.querySelector(selector);
+      if (!el) return;
+      gsap.fromTo(el, { innerText: 0 }, { 
+        innerText: target, 
+        duration: 1.2, 
+        ease: 'power2.out',
+        snap: { innerText: 1 },
+        delay: 0.2
+      });
+    }, delay);
+  },
+  // Progress bar fill
+  fillBar: (selector, width, delay = 0) => {
+    setTimeout(() => {
+      const el = document.querySelector(selector);
+      if (!el) return;
+      gsap.fromTo(el, { width: '0%' }, { width: width, duration: 1, ease: 'power2.out', delay: 0.3 });
+    }, delay);
+  },
+  // Calendar grid entrance
+  calendarIn: (delay = 0) => {
+    setTimeout(() => {
+      const days = document.querySelectorAll('.calendar-day');
+      if (!days.length) return;
+      gsap.fromTo(days, 
+        { opacity: 0, scale: 0.9 }, 
+        { opacity: 1, scale: 1, duration: 0.3, stagger: 0.008, ease: 'power1.out' }
+      );
+    }, delay);
+  },
+  // Topbar slide down
+  topbarIn: (delay = 0) => {
+    setTimeout(() => {
+      const el = document.querySelector('.topbar');
+      if (!el) return;
+      gsap.fromTo(el, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+    }, delay);
+  }
+};
+
 // ─── API HELPER ───
 const API = (() => {
   const base = window.location.origin;
@@ -1214,6 +1303,29 @@ function LoginScreen({ onLogin }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    gsap.fromTo('.login-card', 
+      { opacity: 0, y: 40, scale: 0.92 }, 
+      { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.2)', delay: 0.2 }
+    );
+    gsap.fromTo('.login-brand h1', 
+      { opacity: 0, y: -15 }, 
+      { opacity: 1, y: 0, duration: 0.5, delay: 0.5 }
+    );
+    gsap.fromTo('.login-brand p', 
+      { opacity: 0 }, 
+      { opacity: 1, duration: 0.5, delay: 0.7 }
+    );
+    gsap.fromTo('.form-group', 
+      { opacity: 0, x: -20 }, 
+      { opacity: 1, x: 0, duration: 0.4, stagger: 0.12, delay: 0.8 }
+    );
+    gsap.fromTo('.login-btn', 
+      { opacity: 0, y: 10 }, 
+      { opacity: 1, y: 0, duration: 0.4, delay: 1.2 }
+    );
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -1587,6 +1699,37 @@ function App() {
   useEffect(() => { if (user) { loadFormaciones(); loadUsers(); } }, [user, currentDate, filterEstado, filterFormador]);
   useEffect(() => { if (user && page === 'estadisticas') loadStats(); }, [page, currentDate]);
 
+  // ─── GSAP: Animate on page/view change ───
+  useEffect(() => {
+    if (!user) return;
+    gsapAnimate.topbarIn(50);
+    if (page === 'calendario') {
+      gsapAnimate.fadeIn('.calendar-header', 100);
+      setTimeout(() => gsapAnimate.calendarIn(0), 200);
+    } else if (page === 'estadisticas') {
+      gsapAnimate.staggerIn('.stat-card', 100);
+      gsapAnimate.staggerIn('.table-wrapper', 400);
+    } else if (page === 'equipo') {
+      gsapAnimate.fadeIn('.table-wrapper', 100);
+    }
+  }, [page, view, user]);
+
+  // ─── GSAP: Animate calendar on month/week navigation ───
+  useEffect(() => {
+    if (!user || page !== 'calendario') return;
+    if (view === 'month') {
+      gsapAnimate.calendarIn(50);
+    } else if (view === 'week') {
+      gsapAnimate.staggerIn('.weekly-column', 50);
+    }
+  }, [currentDate, view]);
+
+  // ─── GSAP: Animate sidebar stats ───
+  useEffect(() => {
+    if (!user) return;
+    gsapAnimate.scaleIn('.sidebar-stat', 200);
+  }, [formaciones]);
+
   const handleSaveFormacion = async (data) => {
     try {
       if (editingFormacion?.id) {
@@ -1754,6 +1897,16 @@ function App() {
   const openNew = (dateStr) => { setEditingFormacion(dateStr ? { fecha: dateStr } : null); setShowModal(true); };
 
   const pageTitles = { calendario: 'Calendario', estadisticas: 'Estadísticas', equipo: 'Equipo' };
+
+  // ─── GSAP: Sidebar entrance on first load ───
+  useEffect(() => {
+    if (!user) return;
+    gsap.fromTo('.sidebar-header', { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, delay: 0.1, ease: 'power2.out' });
+    gsap.fromTo('.nav-item', { opacity: 0, x: -15 }, { opacity: 1, x: 0, duration: 0.35, stagger: 0.08, delay: 0.3, ease: 'power2.out' });
+    gsap.fromTo('.sidebar-stats', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, delay: 0.6, ease: 'power2.out' });
+    gsap.fromTo('.mini-cal', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, delay: 0.75, ease: 'power2.out' });
+    gsap.fromTo('.sidebar-footer', { opacity: 0 }, { opacity: 1, duration: 0.4, delay: 0.9 });
+  }, [user ? user.id : null]);
 
   return (
     <div className="app-shell">
