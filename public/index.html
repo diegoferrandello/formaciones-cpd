@@ -2034,6 +2034,7 @@ function App() {
             </div>
 
             {view === 'month' ? (
+              <React.Fragment>
               <div className="calendar-grid">
                 <div className="calendar-weekdays">
                   {DIAS.map(d => <div key={d} className="weekday">{d}</div>)}
@@ -2081,6 +2082,7 @@ function App() {
                   <span>○ Planificada</span><span>◉ Confirmada</span><span>✓ Realizada</span><span>✕ Cancelada</span>
                 </span>
               </div>
+              </React.Fragment>
             ) : (
               <div className="weekly-grid">
                 <div className="weekly-header">
