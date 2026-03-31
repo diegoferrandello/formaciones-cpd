@@ -74,6 +74,8 @@
       bottom: 0;
       z-index: 100;
       transition: transform 0.3s ease;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .sidebar-header {
@@ -156,6 +158,8 @@
       flex: 1;
       margin-left: 260px;
       min-height: 100vh;
+      overflow-x: hidden;
+      max-width: calc(100vw - 260px);
     }
 
     /* ─── TOPBAR ─── */
@@ -239,6 +243,8 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .calendar-nav {
@@ -251,14 +257,16 @@
       font-family: 'Playfair Display', serif;
       font-size: 20px;
       font-weight: 600;
-      min-width: 200px;
+      min-width: 160px;
       text-align: center;
+      white-space: nowrap;
     }
 
     .calendar-filters {
       display: flex;
       gap: 8px;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .filter-chip {
@@ -336,6 +344,7 @@
       cursor: pointer;
       transition: background 0.12s ease;
       position: relative;
+      overflow: hidden;
     }
     .calendar-day:nth-child(7n) { border-right: none; }
     .calendar-day:hover { background: var(--surface-alt); }
@@ -356,7 +365,7 @@
     .day-events { display: flex; flex-direction: column; gap: 3px; }
 
     .day-event {
-      padding: 3px 7px;
+      padding: 2px 6px;
       border-radius: 4px;
       font-size: 11px;
       font-weight: 500;
@@ -365,13 +374,18 @@
       overflow: hidden;
       text-overflow: ellipsis;
       transition: transform 0.1s ease;
+      border-left: 3px solid transparent;
+      line-height: 1.4;
     }
     .day-event:hover { transform: scale(1.03) translateY(-1px); box-shadow: var(--shadow-sm); }
+    .day-event.cancelada { text-decoration: line-through; opacity: 0.6; }
 
-    .day-event.planificada { background: var(--info-light); color: var(--planificada); border-left: 3px solid var(--planificada); }
-    .day-event.confirmada { background: var(--warning-light); color: var(--confirmada); border-left: 3px solid var(--confirmada); }
-    .day-event.realizada { background: var(--success-light); color: var(--realizada); border-left: 3px solid var(--realizada); }
-    .day-event.cancelada { background: var(--danger-light); color: var(--cancelada); border-left: 3px solid var(--cancelada); text-decoration: line-through; }
+    .day-event-estado {
+      font-size: 9px;
+      margin-right: 3px;
+      opacity: 0.7;
+      vertical-align: middle;
+    }
 
     .day-more {
       font-size: 10px;
@@ -438,13 +452,10 @@
       border-radius: var(--radius-sm);
       cursor: pointer;
       transition: transform 0.1s ease;
+      border-left: 3px solid transparent;
     }
     .weekly-event:hover { transform: translateY(-2px) scale(1.01); box-shadow: var(--shadow-md); }
-
-    .weekly-event.planificada { background: var(--info-light); border-left: 3px solid var(--planificada); }
-    .weekly-event.confirmada { background: var(--warning-light); border-left: 3px solid var(--confirmada); }
-    .weekly-event.realizada { background: var(--success-light); border-left: 3px solid var(--realizada); }
-    .weekly-event.cancelada { background: var(--danger-light); border-left: 3px solid var(--cancelada); }
+    .weekly-event.cancelada { text-decoration: line-through; opacity: 0.6; }
 
     .weekly-event-time { font-size: 10px; font-weight: 600; color: var(--text-muted); }
     .weekly-event-title { font-size: 12px; font-weight: 500; margin-top: 2px; }
@@ -807,10 +818,21 @@
     .toast.error { background: var(--danger); }
 
     /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .sidebar { width: 220px; }
+      .main-content { margin-left: 220px; max-width: calc(100vw - 220px); }
+      .calendar-container { padding: 16px 20px; }
+      .calendar-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .calendar-month { font-size: 18px; min-width: 140px; }
+      .filter-chip { padding: 5px 10px; font-size: 11px; }
+      .calendar-day { min-height: 90px; padding: 6px; }
+      .day-event { font-size: 10px; padding: 2px 6px; }
+    }
+
     @media (max-width: 768px) {
-      .sidebar { transform: translateX(-100%); }
+      .sidebar { transform: translateX(-100%); width: 260px; }
       .sidebar.open { transform: translateX(0); }
-      .main-content { margin-left: 0; }
+      .main-content { margin-left: 0; max-width: 100vw; }
       .calendar-header { flex-direction: column; gap: 12px; }
       .form-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
@@ -1162,6 +1184,26 @@ const CATEGORIAS_OPCIONES = ['Hair Care', 'Hair Color', 'Make Up', 'Skin Care'];
 const ESTADOS = { planificada: 'Planificada', confirmada: 'Confirmada', realizada: 'Realizada', cancelada: 'Cancelada' };
 const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 const DIAS = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+
+// ─── FORMADOR COLORS ───
+const FORMADOR_PALETTE = [
+  { bg: '#EBF5FB', border: '#2874A6', text: '#1B4F72' },  // Azul
+  { bg: '#FEF5E7', border: '#D4880F', text: '#7E5109' },  // Ámbar/Dorado
+  { bg: '#E8F8F5', border: '#1ABC9C', text: '#0E6655' },  // Turquesa
+  { bg: '#F4ECF7', border: '#8E44AD', text: '#6C3483' },  // Violeta
+  { bg: '#FDEBD0', border: '#E67E22', text: '#A04000' },  // Naranja
+  { bg: '#FADBD8', border: '#E74C3C', text: '#922B21' },  // Rojo
+  { bg: '#D5F5E3', border: '#27AE60', text: '#1E8449' },  // Verde
+  { bg: '#EAF2F8', border: '#2980B9', text: '#1A5276' },  // Azul celeste
+  { bg: '#F9EBEA', border: '#CD6155', text: '#943126' },  // Coral
+  { bg: '#E8DAEF', border: '#7D3C98', text: '#5B2C6F' },  // Púrpura oscuro
+  { bg: '#D4EFDF', border: '#229954', text: '#196F3D' },  // Verde esmeralda
+  { bg: '#FCF3CF', border: '#D4AC0D', text: '#9A7D0A' },  // Amarillo
+];
+const getFormadorColor = (formadorId) => {
+  if (!formadorId) return { bg: '#F5F5F0', border: '#9C968F', text: '#6B6560' };
+  return FORMADOR_PALETTE[(formadorId - 1) % FORMADOR_PALETTE.length];
+};
 
 // ─── TOAST ───
 // ─── SIDEBAR STATS ───
@@ -2005,17 +2047,39 @@ function App() {
                       <div key={i} className={`calendar-day ${cd.otherMonth ? 'other-month' : ''} ${isToday ? 'today' : ''}`} onDoubleClick={() => !cd.otherMonth && openNew(dateStr)}>
                         <div className="day-number">{cd.day}</div>
                         <div className="day-events">
-                          {events.slice(0, 3).map(ev => (
-                            <div key={ev.id} className={`day-event ${ev.estado}`} onClick={() => openDetail(ev)}>
-                              {ev.hora_inicio?.slice(0,5)} {ev.titulo}
-                            </div>
-                          ))}
+                          {events.slice(0, 3).map(ev => {
+                            const fc = getFormadorColor(ev.formador_id);
+                            const estadoIcons = { planificada: '○', confirmada: '◉', realizada: '✓', cancelada: '✕' };
+                            return (
+                              <div key={ev.id} className={`day-event ${ev.estado}`} onClick={() => openDetail(ev)}
+                                style={{background: fc.bg, color: fc.text, borderLeftColor: fc.border}}>
+                                <span className="day-event-estado">{estadoIcons[ev.estado] || ''}</span>
+                                {ev.hora_inicio?.slice(0,5)} {ev.titulo}
+                              </div>
+                            );
+                          })}
                           {events.length > 3 && <div className="day-more">+{events.length - 3} más</div>}
                         </div>
                       </div>
                     );
                   })}
                 </div>
+              </div>
+              {/* Formador Legend */}
+              <div style={{display:'flex',flexWrap:'wrap',gap:'12px',marginTop:'12px',padding:'10px 16px',background:'var(--surface)',borderRadius:'var(--radius)',border:'1px solid var(--border-light)',alignItems:'center'}}>
+                <span style={{fontSize:'11px',fontWeight:600,color:'var(--text-muted)',textTransform:'uppercase',letterSpacing:'1px',marginRight:'4px'}}>Formadores:</span>
+                {users.filter(u => u.activo !== false).map(u => {
+                  const fc = getFormadorColor(u.id);
+                  return (
+                    <div key={u.id} style={{display:'flex',alignItems:'center',gap:'6px',fontSize:'12px',fontWeight:500}}>
+                      <div style={{width:'10px',height:'10px',borderRadius:'50%',background:fc.border,flexShrink:0}}></div>
+                      <span style={{color:fc.text}}>{u.nombre}</span>
+                    </div>
+                  );
+                })}
+                <span style={{fontSize:'10px',color:'var(--text-muted)',marginLeft:'auto',display:'flex',gap:'10px',alignItems:'center'}}>
+                  <span>○ Planificada</span><span>◉ Confirmada</span><span>✓ Realizada</span><span>✕ Cancelada</span>
+                </span>
               </div>
             ) : (
               <div className="weekly-grid">
@@ -2038,13 +2102,17 @@ function App() {
                     });
                     return (
                       <div key={i} className="weekly-column">
-                        {events.map(ev => (
-                          <div key={ev.id} className={`weekly-event ${ev.estado}`} onClick={() => openDetail(ev)}>
-                            <div className="weekly-event-time">{ev.hora_inicio?.slice(0,5)}{ev.hora_fin ? ` – ${ev.hora_fin.slice(0,5)}` : ''}</div>
-                            <div className="weekly-event-title">{ev.titulo}</div>
-                            <div className="weekly-event-loc">{[ev.cadena, ev.pdv_nombre].filter(Boolean).join(' · ')}</div>
-                          </div>
-                        ))}
+                        {events.map(ev => {
+                          const fc = getFormadorColor(ev.formador_id);
+                          return (
+                            <div key={ev.id} className={`weekly-event ${ev.estado}`} onClick={() => openDetail(ev)}
+                              style={{background: fc.bg, borderLeftColor: fc.border, color: fc.text}}>
+                              <div className="weekly-event-time">{ev.hora_inicio?.slice(0,5)}{ev.hora_fin ? ` – ${ev.hora_fin.slice(0,5)}` : ''}</div>
+                              <div className="weekly-event-title">{ev.titulo}</div>
+                              <div className="weekly-event-loc">{[ev.formador?.nombre, ev.cadena, ev.pdv_nombre].filter(Boolean).join(' · ')}</div>
+                            </div>
+                          );
+                        })}
                       </div>
                     );
                   })}
@@ -2087,12 +2155,15 @@ function App() {
                 <div style={{background:'var(--surface)',borderRadius:'var(--radius-lg)',border:'1px solid var(--border-light)',overflow:'hidden',boxShadow:'var(--shadow-sm)'}}>
                   <div style={{display:'grid',gridTemplateColumns:`80px repeat(${displayFormadores.length}, 1fr)`,borderBottom:'1px solid var(--border-light)',background:'var(--surface-alt)'}}>
                     <div style={{padding:'14px 12px',fontSize:'11px',fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--text-muted)'}}>Hora</div>
-                    {displayFormadores.map((f, i) => (
-                      <div key={f.id} style={{padding:'14px 12px',textAlign:'center',borderLeft:'1px solid var(--border-light)'}}>
-                        <div style={{width:'28px',height:'28px',borderRadius:'50%',background:COLORS[i % COLORS.length],display:'inline-flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:'12px',fontWeight:600,marginBottom:'4px'}}>{f.nombre?.charAt(0)}</div>
-                        <div style={{fontSize:'12px',fontWeight:600}}>{f.nombre}</div>
-                      </div>
-                    ))}
+                    {displayFormadores.map((f, i) => {
+                      const fc = getFormadorColor(f.id);
+                      return (
+                        <div key={f.id} style={{padding:'14px 12px',textAlign:'center',borderLeft:'1px solid var(--border-light)'}}>
+                          <div style={{width:'28px',height:'28px',borderRadius:'50%',background:fc.border,display:'inline-flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:'12px',fontWeight:600,marginBottom:'4px'}}>{f.nombre?.charAt(0)}</div>
+                          <div style={{fontSize:'12px',fontWeight:600}}>{f.nombre}</div>
+                        </div>
+                      );
+                    })}
                   </div>
                   <div style={{display:'grid',gridTemplateColumns:`80px repeat(${displayFormadores.length}, 1fr)`,position:'relative'}}>
                     <div>
@@ -2109,13 +2180,13 @@ function App() {
                           ))}
                           {fEvents.map(ev => {
                             const pos = getEventStyle(ev);
-                            const bgColors = { planificada: 'var(--info-light)', confirmada: 'var(--warning-light)', realizada: 'var(--success-light)', cancelada: 'var(--danger-light)' };
-                            const borderColors = { planificada: 'var(--planificada)', confirmada: 'var(--confirmada)', realizada: 'var(--realizada)', cancelada: 'var(--cancelada)' };
+                            const fc = getFormadorColor(ev.formador_id);
+                            const estadoIcons = { planificada: '○', confirmada: '◉', realizada: '✓', cancelada: '✕' };
                             return (
-                              <div key={ev.id} onClick={() => { setSelectedFormacion(ev); setShowDetail(true); }} style={{position:'absolute',top:pos.top,height:pos.height,left:'4px',right:'4px',background:bgColors[ev.estado],borderLeft:`3px solid ${borderColors[ev.estado]}`,borderRadius:'6px',padding:'6px 8px',cursor:'pointer',overflow:'hidden',fontSize:'11px',transition:'transform 0.1s ease',zIndex:2}} onMouseEnter={e => e.currentTarget.style.transform='scale(1.02)'} onMouseLeave={e => e.currentTarget.style.transform='scale(1)'}>
-                                <div style={{fontWeight:600,fontSize:'11px'}}>{ev.hora_inicio?.slice(0,5)} – {ev.hora_fin?.slice(0,5)}</div>
+                              <div key={ev.id} onClick={() => { setSelectedFormacion(ev); setShowDetail(true); }} style={{position:'absolute',top:pos.top,height:pos.height,left:'4px',right:'4px',background:fc.bg,borderLeft:`3px solid ${fc.border}`,borderRadius:'6px',padding:'6px 8px',cursor:'pointer',overflow:'hidden',fontSize:'11px',transition:'transform 0.1s ease',zIndex:2,color:fc.text}} onMouseEnter={e => e.currentTarget.style.transform='scale(1.02)'} onMouseLeave={e => e.currentTarget.style.transform='scale(1)'}>
+                                <div style={{fontWeight:600,fontSize:'11px'}}><span style={{opacity:0.6,marginRight:'4px'}}>{estadoIcons[ev.estado]}</span>{ev.hora_inicio?.slice(0,5)} – {ev.hora_fin?.slice(0,5)}</div>
                                 <div style={{fontWeight:500,marginTop:'2px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{ev.titulo}</div>
-                                {parseFloat(pos.height) > 50 && <div style={{fontSize:'10px',color:'var(--text-muted)',marginTop:'2px'}}>{ev.cadena}{ev.modalidad === 'virtual' ? ' 🖥️' : ''}</div>}
+                                {parseFloat(pos.height) > 50 && <div style={{fontSize:'10px',opacity:0.7,marginTop:'2px'}}>{ev.cadena}{ev.modalidad === 'virtual' ? ' 🖥️' : ''}</div>}
                               </div>
                             );
                           })}
