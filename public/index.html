@@ -133,6 +133,7 @@
       align-items: center;
       gap: 10px;
       padding: 8px 14px;
+      min-width: 0;
     }
 
     .user-avatar {
@@ -149,8 +150,29 @@
       flex-shrink: 0;
     }
 
-    .user-name { font-size: 13px; font-weight: 500; color: #fff; }
-    .user-role { font-size: 11px; color: rgba(255,255,255,0.45); text-transform: capitalize; }
+    .user-details {
+      min-width: 0;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .user-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .user-role {
+      font-size: 10px;
+      color: rgba(255,255,255,0.45);
+      text-transform: capitalize;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     .main-content {
       flex: 1;
@@ -673,6 +695,24 @@
     .toast.success { background: var(--success); }
     .toast.error { background: var(--danger); }
 
+    /* ===== LOADING SCREEN ===== */
+    .loading-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #2D2926 0%, #1a1714 50%, #2D2926 100%);
+    }
+    .loading-spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid rgba(255,255,255,0.15);
+      border-top-color: var(--accent-gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
     @media (max-width: 1100px) {
       .sidebar { width: 220px; }
       .main-content { margin-left: 220px; max-width: calc(100vw - 220px); }
@@ -850,7 +890,7 @@ const API = (() => {
     const token = getToken();
     if (token) headers['Authorization'] = `Bearer ${token}`;
     const res = await fetch(`${base}${path}`, { ...opts, headers: { ...headers, ...opts.headers } });
-    if (res.status === 401) { localStorage.removeItem('cpd_token'); localStorage.removeItem('cpd_user'); window.location.reload(); }
+    if (res.status === 401) { localStorage.removeItem('cpd_token'); localStorage.removeItem('cpd_user'); throw new Error('SESSION_EXPIRED'); }
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Error');
     return data;
@@ -981,7 +1021,7 @@ function MiniCalendar({ currentDate, onDateSelect, formaciones }) {
         <div className="mini-cal-title">{MINI_MESES[miniMonth]} {miniYear}</div>
         <div className="mini-cal-nav"><button onClick={() => navMini(-1)}><Icons.ChevLeft /></button><button onClick={() => navMini(1)}><Icons.ChevRight /></button></div>
       </div>
-      <div className="mini-cal-weekdays">{['Lu','Ma','Mi','Ju','Vi','Sá','Do'].map(d => <div key={d} className="mini-cal-wd">{d}</div>)}</div>
+      <div className="mini-cal-weekdays">{['Lu','Ma','Mi','Ju','Vi','Sa','Do'].map(d => <div key={d} className="mini-cal-wd">{d}</div>)}</div>
       <div className="mini-cal-days">
         {days.map((d, i) => {
           const isToday = !d.other && d.day === today.getDate() && miniMonth === today.getMonth() && miniYear === today.getFullYear();
@@ -1124,8 +1164,12 @@ function UserModal({ show, onClose, onSave }) {
   );
 }
 
+/* ============================================================
+   APP COMPONENT — FIX 1: Session verification on mount
+   ============================================================ */
 function App() {
-  const [user, setUser] = useState(() => { try { return JSON.parse(localStorage.getItem('cpd_user')); } catch { return null; } });
+  const [user, setUser] = useState(null);
+  const [checking, setChecking] = useState(true);
   const [page, setPage] = useState('calendario');
   const [view, setView] = useState('month');
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -1144,8 +1188,28 @@ function App() {
 
   const showToast = (message, type = 'success') => setToast({ message, type });
 
+  /* FIX 1: Verify session on mount — prevents blank screen */
+  useEffect(() => {
+    const token = localStorage.getItem('cpd_token');
+    const savedUser = localStorage.getItem('cpd_user');
+    if (!token || !savedUser) {
+      setChecking(false);
+      return;
+    }
+    /* Token exists — verify it's still valid */
+    API.me().then(userData => {
+      setUser(userData);
+      setChecking(false);
+    }).catch(() => {
+      /* Token expired or invalid — clear and show login */
+      localStorage.removeItem('cpd_token');
+      localStorage.removeItem('cpd_user');
+      setChecking(false);
+    });
+  }, []);
+
   const loadFormaciones = useCallback(async () => {
-    try { const m = currentDate.getMonth() + 1; const y = currentDate.getFullYear(); const params = { mes: m, anio: y }; if (filterEstado) params.estado = filterEstado; if (filterFormador) params.formador_id = filterFormador; const data = await API.getFormaciones(params); setFormaciones(data); } catch (e) { console.error(e); }
+    try { const m = currentDate.getMonth() + 1; const y = currentDate.getFullYear(); const params = { mes: m, anio: y }; if (filterEstado) params.estado = filterEstado; if (filterFormador) params.formador_id = filterFormador; const data = await API.getFormaciones(params); setFormaciones(data); } catch (e) { if (e.message === 'SESSION_EXPIRED') { setUser(null); } console.error(e); }
   }, [currentDate, filterEstado, filterFormador]);
 
   const loadUsers = async () => { try { const data = await API.getUsers(); setUsers(data); } catch (e) {} };
@@ -1188,6 +1252,9 @@ function App() {
   const navMonth = (dir) => { const d = new Date(currentDate); d.setMonth(d.getMonth() + dir); setCurrentDate(d); };
   const navWeek = (dir) => { const d = new Date(currentDate); d.setDate(d.getDate() + (7 * dir)); setCurrentDate(d); };
   const navDay = (dir) => { const d = new Date(currentDate); d.setDate(d.getDate() + dir); setCurrentDate(d); };
+
+  /* FIX 1: Show loading spinner while checking session */
+  if (checking) return <div className="loading-wrapper"><div className="loading-spinner"></div></div>;
 
   if (!user) return <LoginScreen onLogin={setUser} />;
 
@@ -1242,15 +1309,14 @@ function App() {
         </div>
         <SidebarStats formaciones={formaciones} currentDate={currentDate} />
         <MiniCalendar currentDate={currentDate} onDateSelect={(d) => { setCurrentDate(d); setPage('calendario'); }} formaciones={formaciones} />
+        {/* ===== FIX 2: Consolidated user info — name + role in one compact block ===== */}
         <div className="sidebar-footer">
           <div className="user-info">
             <div className="user-avatar">{user.nombre?.charAt(0)}</div>
-            <div><div className="user-name">{user.nombre}</div><div className="user-role">{user.rol}</div></div>
-          </div>
-          <div style={{padding:'8px 14px',display:'flex',alignItems:'center',gap:'8px',marginBottom:'4px'}}>
-            <div style={{width:'8px',height:'8px',borderRadius:'50%',background:'#E63329',flexShrink:0}}></div>
-            <span style={{fontSize:'12px',color:'rgba(255,255,255,0.7)',fontWeight:500}}>Diego Ferrandello</span>
-            <span style={{fontSize:'11px',color:'rgba(255,255,255,0.35)'}}>· Operations Manager</span>
+            <div className="user-details">
+              <div className="user-name">{user.nombre}</div>
+              <div className="user-role">{user.cargo || user.rol}</div>
+            </div>
           </div>
           <div className="nav-item" onClick={logout} style={{marginTop:4}}><Icons.Logout /> Cerrar Sesión</div>
         </div>
@@ -1313,7 +1379,6 @@ function App() {
                   })}
                 </div>
               </div>
-              {/* ===== MODIFIED LEGEND: Separated by Formadores & Administradores ===== */}
               <div style={{display:'flex',flexWrap:'wrap',gap:'12px',marginTop:'12px',padding:'10px 16px',background:'var(--surface)',borderRadius:'var(--radius)',border:'1px solid var(--border-light)',alignItems:'center'}}>
                 <span style={{fontSize:'11px',fontWeight:600,color:'var(--text-muted)',textTransform:'uppercase',letterSpacing:'1px',marginRight:'4px'}}>Formadores:</span>
                 {users.filter(u => u.activo !== false && u.rol === 'formador').map(u => {
