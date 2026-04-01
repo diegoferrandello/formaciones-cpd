@@ -2069,7 +2069,22 @@ function App() {
               {/* Formador Legend */}
               <div style={{display:'flex',flexWrap:'wrap',gap:'12px',marginTop:'12px',padding:'10px 16px',background:'var(--surface)',borderRadius:'var(--radius)',border:'1px solid var(--border-light)',alignItems:'center'}}>
                 <span style={{fontSize:'11px',fontWeight:600,color:'var(--text-muted)',textTransform:'uppercase',letterSpacing:'1px',marginRight:'4px'}}>Formadores:</span>
-                {users.filter(u => u.activo !== false).map(u => {
+                {users.filter(u => u.activo !== false && u.rol === 'formador').map(u => {<span style={{width:'1px',height:'20px',background:'var(--border)',margin:'0 8px'}}></span>
+                <span style={{fontSize:'11px',fontWeight:600,color:'var(--text-muted)',textTransform:'uppercase',letterSpacing:'1px',marginRight:'4px'}}>Administradores:</span>
+                {users.filter(u => u.activo !== false && u.rol === 'admin').map(u => {
+                  const fc = getFormadorColor(u.id);
+                  return (
+                    <div key={u.id} style={{display:'flex',alignItems:'center',gap:'6px',fontSize:'12px',fontWeight:500}}>
+                      <div style={{width:'10px',height:'10px',borderRadius:'50%',background:fc.border,flexShrink:0}}></div>
+                      <span style={{color:fc.text}}>{u.nombre}</span>
+                    </div>
+                  );
+                })}
+```
+
+**Cambio 2 — Buscá:**
+```
+<div className="nav-item" onClick={logout}
                   const fc = getFormadorColor(u.id);
                   return (
                     <div key={u.id} style={{display:'flex',alignItems:'center',gap:'6px',fontSize:'12px',fontWeight:500}}>
