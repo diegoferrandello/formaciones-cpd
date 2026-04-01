@@ -53,13 +53,11 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ─── SCROLLBAR ─── */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-    /* ─── LAYOUT ─── */
     .app-shell { display: flex; min-height: 100vh; }
     
     .sidebar {
@@ -162,7 +160,6 @@
       max-width: calc(100vw - 260px);
     }
 
-    /* ─── TOPBAR ─── */
     .topbar {
       padding: 20px 32px;
       display: flex;
@@ -184,7 +181,6 @@
 
     .topbar-actions { display: flex; gap: 10px; align-items: center; }
 
-    /* ─── BUTTONS ─── */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -202,40 +198,25 @@
 
     .btn svg { width: 16px; height: 16px; }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
+    .btn-primary { background: var(--accent); color: #fff; }
     .btn-primary:hover { background: #1a1714; transform: translateY(-2px); box-shadow: var(--shadow-md); }
     .btn-primary:active { transform: translateY(0); }
 
-    .btn-secondary {
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
     .btn-secondary:hover { border-color: var(--text-muted); }
 
-    .btn-gold {
-      background: var(--accent-gold);
-      color: #fff;
-    }
+    .btn-gold { background: var(--accent-gold); color: #fff; }
     .btn-gold:hover { background: #B08A20; }
 
     .btn-danger { background: var(--danger); color: #fff; }
     .btn-danger:hover { background: #A93226; }
 
-    .btn-ghost {
-      background: transparent;
-      color: var(--text-secondary);
-      padding: 8px 12px;
-    }
+    .btn-ghost { background: transparent; color: var(--text-secondary); padding: 8px 12px; }
     .btn-ghost:hover { background: var(--surface-alt); color: var(--text); }
 
     .btn-sm { padding: 6px 12px; font-size: 12px; }
     .btn-icon { padding: 8px; border-radius: var(--radius-sm); }
 
-    /* ─── CALENDAR ─── */
     .calendar-container { padding: 24px 32px; }
 
     .calendar-header {
@@ -247,11 +228,7 @@
       gap: 12px;
     }
 
-    .calendar-nav {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .calendar-nav { display: flex; align-items: center; gap: 12px; }
 
     .calendar-month {
       font-family: 'Playfair Display', serif;
@@ -262,12 +239,7 @@
       white-space: nowrap;
     }
 
-    .calendar-filters {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+    .calendar-filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
     .filter-chip {
       padding: 6px 14px;
@@ -283,12 +255,7 @@
     .filter-chip.active { background: var(--accent); color: #fff; border-color: var(--accent); transform: scale(1.05); }
     .filter-chip:hover:not(.active) { border-color: var(--text-muted); transform: translateY(-1px); }
 
-    .view-toggle {
-      display: flex;
-      background: var(--surface-alt);
-      border-radius: var(--radius-sm);
-      padding: 3px;
-    }
+    .view-toggle { display: flex; background: var(--surface-alt); border-radius: var(--radius-sm); padding: 3px; }
 
     .view-btn {
       padding: 6px 14px;
@@ -331,10 +298,7 @@
       color: var(--text-muted);
     }
 
-    .calendar-days {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-    }
+    .calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); }
 
     .calendar-day {
       min-height: 110px;
@@ -351,16 +315,8 @@
     .calendar-day.other-month { opacity: 0.35; }
     .calendar-day.today { background: var(--accent-gold-light); }
 
-    .day-number {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-secondary);
-      margin-bottom: 4px;
-    }
-    .calendar-day.today .day-number {
-      color: var(--accent-gold);
-      font-weight: 700;
-    }
+    .day-number { font-size: 13px; font-weight: 500; color: var(--text-secondary); margin-bottom: 4px; }
+    .calendar-day.today .day-number { color: var(--accent-gold); font-weight: 700; }
 
     .day-events { display: flex; flex-direction: column; gap: 3px; }
 
@@ -380,21 +336,10 @@
     .day-event:hover { transform: scale(1.03) translateY(-1px); box-shadow: var(--shadow-sm); }
     .day-event.cancelada { text-decoration: line-through; opacity: 0.6; }
 
-    .day-event-estado {
-      font-size: 9px;
-      margin-right: 3px;
-      opacity: 0.7;
-      vertical-align: middle;
-    }
+    .day-event-estado { font-size: 9px; margin-right: 3px; opacity: 0.7; vertical-align: middle; }
 
-    .day-more {
-      font-size: 10px;
-      color: var(--text-muted);
-      padding: 2px 4px;
-      font-weight: 500;
-    }
+    .day-more { font-size: 10px; color: var(--text-muted); padding: 2px 4px; font-weight: 500; }
 
-    /* ─── WEEKLY VIEW ─── */
     .weekly-grid {
       background: var(--surface);
       border-radius: var(--radius-lg);
@@ -410,33 +355,12 @@
       border-bottom: 1px solid var(--border-light);
     }
 
-    .weekly-day-header {
-      padding: 14px 12px;
-      text-align: center;
-    }
-
-    .weekly-day-name {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .weekly-day-num {
-      font-size: 22px;
-      font-weight: 600;
-      color: var(--text);
-      margin-top: 2px;
-    }
-
+    .weekly-day-header { padding: 14px 12px; text-align: center; }
+    .weekly-day-name { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; }
+    .weekly-day-num { font-size: 22px; font-weight: 600; color: var(--text); margin-top: 2px; }
     .weekly-day-header.today .weekly-day-num { color: var(--accent-gold); }
 
-    .weekly-body {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      min-height: 400px;
-    }
+    .weekly-body { display: grid; grid-template-columns: repeat(7, 1fr); min-height: 400px; }
 
     .weekly-column {
       border-right: 1px solid var(--border-light);
@@ -461,7 +385,6 @@
     .weekly-event-title { font-size: 12px; font-weight: 500; margin-top: 2px; }
     .weekly-event-loc { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
 
-    /* ─── MODAL ─── */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -496,11 +419,7 @@
       justify-content: space-between;
     }
 
-    .modal-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 600;
-    }
+    .modal-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; }
 
     .modal-close {
       width: 32px;
@@ -519,11 +438,7 @@
 
     .modal-body { padding: 20px 28px 28px; }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-grid .full { grid-column: 1 / -1; }
 
     .form-group { display: flex; flex-direction: column; gap: 5px; }
@@ -563,7 +478,6 @@
       border-top: 1px solid var(--border-light);
     }
 
-    /* ─── DETAIL PANEL ─── */
     .detail-status {
       display: inline-flex;
       align-items: center;
@@ -580,28 +494,14 @@
     .detail-status.realizada { background: var(--success-light); color: var(--realizada); }
     .detail-status.cancelada { background: var(--danger-light); color: var(--cancelada); }
 
-    .detail-status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-    }
+    .detail-status-dot { width: 7px; height: 7px; border-radius: 50%; }
     .planificada .detail-status-dot { background: var(--planificada); }
     .confirmada .detail-status-dot { background: var(--confirmada); }
     .realizada .detail-status-dot { background: var(--realizada); }
     .cancelada .detail-status-dot { background: var(--cancelada); }
 
-    .detail-info {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .detail-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
+    .detail-info { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
+    .detail-row { display: flex; align-items: flex-start; gap: 12px; }
 
     .detail-icon {
       width: 36px;
@@ -618,22 +518,10 @@
     .detail-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
     .detail-value { font-size: 14px; font-weight: 500; }
 
-    .fotos-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .foto-thumb {
-      aspect-ratio: 1;
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      border: 1px solid var(--border-light);
-    }
+    .fotos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+    .foto-thumb { aspect-ratio: 1; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-light); }
     .foto-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* ─── STATS CARDS ─── */
     .stats-container { padding: 24px 32px; }
 
     .stats-grid {
@@ -657,7 +545,6 @@
     .stat-value { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; margin-top: 6px; }
     .stat-sub { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
 
-    /* ─── USERS TABLE ─── */
     .users-container { padding: 24px 32px; }
 
     .table-wrapper {
@@ -668,10 +555,7 @@
       box-shadow: var(--shadow-sm);
     }
 
-    .table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+    .table { width: 100%; border-collapse: collapse; }
 
     .table th {
       padding: 14px 20px;
@@ -685,12 +569,7 @@
       border-bottom: 1px solid var(--border-light);
     }
 
-    .table td {
-      padding: 14px 20px;
-      font-size: 14px;
-      border-bottom: 1px solid var(--border-light);
-    }
-
+    .table td { padding: 14px 20px; font-size: 14px; border-bottom: 1px solid var(--border-light); }
     .table tr:last-child td { border-bottom: none; }
     .table tr:hover td { background: var(--surface-alt); }
 
@@ -706,9 +585,7 @@
     .role-badge.admin { background: var(--accent-gold-light); color: var(--accent-gold); }
     .role-badge.formador { background: var(--info-light); color: var(--info); }
 
-    /* ─── LIST VIEW ─── */
     .list-container { padding: 24px 32px; }
-
     .list-card {
       background: var(--surface);
       border: 1px solid var(--border-light);
@@ -723,10 +600,7 @@
     }
     .list-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
 
-    .list-date {
-      text-align: center;
-      min-width: 50px;
-    }
+    .list-date { text-align: center; min-width: 50px; }
     .list-date-day { font-size: 22px; font-weight: 700; color: var(--accent); }
     .list-date-month { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; }
 
@@ -734,7 +608,6 @@
     .list-title { font-size: 15px; font-weight: 600; }
     .list-meta { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
 
-    /* ─── LOGIN ─── */
     .login-wrapper {
       min-height: 100vh;
       display: flex;
@@ -753,25 +626,9 @@
       box-shadow: var(--shadow-lg);
     }
 
-    .login-brand {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-
-    .login-brand h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .login-brand p {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--text-muted);
-      margin-top: 6px;
-    }
+    .login-brand { text-align: center; margin-bottom: 32px; }
+    .login-brand h1 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--text); }
+    .login-brand p { font-size: 12px; text-transform: uppercase; letter-spacing: 3px; color: var(--text-muted); margin-top: 6px; }
 
     .login-form { display: flex; flex-direction: column; gap: 18px; }
 
@@ -800,7 +657,6 @@
       text-align: center;
     }
 
-    /* ─── TOAST ─── */
     .toast {
       position: fixed;
       bottom: 24px;
@@ -817,7 +673,6 @@
     .toast.success { background: var(--success); }
     .toast.error { background: var(--danger); }
 
-    /* ─── RESPONSIVE ─── */
     @media (max-width: 1100px) {
       .sidebar { width: 220px; }
       .main-content { margin-left: 220px; max-width: calc(100vw - 220px); }
@@ -862,7 +717,6 @@
     .upload-area:hover { border-color: var(--accent-gold); background: var(--accent-gold-light); }
     .upload-area p { font-size: 13px; color: var(--text-muted); }
 
-    /* ─── MINI CALENDAR ─── */
     .mini-cal {
       padding: 12px 14px;
       margin: 0 12px 8px;
@@ -870,22 +724,9 @@
       border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,0.06);
     }
-    .mini-cal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-    .mini-cal-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.8);
-      letter-spacing: 0.3px;
-    }
-    .mini-cal-nav {
-      display: flex;
-      gap: 2px;
-    }
+    .mini-cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .mini-cal-title { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); letter-spacing: 0.3px; }
+    .mini-cal-nav { display: flex; gap: 2px; }
     .mini-cal-nav button {
       background: none;
       border: none;
@@ -900,25 +741,9 @@
     }
     .mini-cal-nav button:hover { color: #fff; background: rgba(255,255,255,0.08); }
     .mini-cal-nav button svg { width: 14px; height: 14px; }
-    .mini-cal-weekdays {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      margin-bottom: 4px;
-    }
-    .mini-cal-wd {
-      text-align: center;
-      font-size: 9px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: rgba(255,255,255,0.3);
-      padding: 2px 0;
-    }
-    .mini-cal-days {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 1px;
-    }
+    .mini-cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); margin-bottom: 4px; }
+    .mini-cal-wd { text-align: center; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(255,255,255,0.3); padding: 2px 0; }
+    .mini-cal-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; }
     .mini-cal-day {
       text-align: center;
       font-size: 11px;
@@ -932,15 +757,8 @@
     }
     .mini-cal-day:hover { background: rgba(255,255,255,0.08); color: #fff; }
     .mini-cal-day.other { opacity: 0.25; }
-    .mini-cal-day.today {
-      color: var(--accent-gold);
-      font-weight: 700;
-    }
-    .mini-cal-day.selected {
-      background: var(--accent-gold);
-      color: #fff;
-      font-weight: 600;
-    }
+    .mini-cal-day.today { color: var(--accent-gold); font-weight: 700; }
+    .mini-cal-day.selected { background: var(--accent-gold); color: #fff; font-weight: 600; }
     .mini-cal-day.has-events::after {
       content: '';
       position: absolute;
@@ -955,11 +773,7 @@
     .mini-cal-day.selected.has-events::after { background: #fff; }
     .mini-cal-day.today.has-events::after { background: var(--accent-gold); }
 
-    /* ─── SIDEBAR STATS ─── */
-    .sidebar-stats {
-      padding: 0 12px;
-      margin-bottom: 10px;
-    }
+    .sidebar-stats { padding: 0 12px; margin-bottom: 10px; }
     .sidebar-stats-title {
       font-size: 10px;
       font-weight: 600;
@@ -969,11 +783,7 @@
       padding: 0 14px;
       margin-bottom: 8px;
     }
-    .sidebar-stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-    }
+    .sidebar-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .sidebar-stat {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.06);
@@ -981,13 +791,7 @@
       padding: 10px 12px;
       text-align: center;
     }
-    .sidebar-stat-val {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1;
-    }
+    .sidebar-stat-val { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #fff; line-height: 1; }
     .sidebar-stat-val.gold { color: var(--accent-gold); }
     .sidebar-stat-val.green { color: #5ABE82; }
     .sidebar-stat-val.blue { color: #5DADE2; }
@@ -1029,94 +833,18 @@
 <script type="text/babel">
 const { useState, useEffect, useCallback, useRef } = React;
 
-// ─── GSAP ANIMATIONS ───
 const gsapAnimate = {
-  // Fade in + slide up elements with stagger
-  staggerIn: (selector, delay = 0) => {
-    setTimeout(() => {
-      const els = document.querySelectorAll(selector);
-      if (!els.length) return;
-      gsap.fromTo(els, 
-        { opacity: 0, y: 20 }, 
-        { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out' }
-      );
-    }, delay);
-  },
-  // Fade in single element
-  fadeIn: (selector, delay = 0) => {
-    setTimeout(() => {
-      const el = document.querySelector(selector);
-      if (!el) return;
-      gsap.fromTo(el, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
-    }, delay);
-  },
-  // Scale in from center
-  scaleIn: (selector, delay = 0) => {
-    setTimeout(() => {
-      const els = document.querySelectorAll(selector);
-      if (!els.length) return;
-      gsap.fromTo(els, 
-        { opacity: 0, scale: 0.85 }, 
-        { opacity: 1, scale: 1, duration: 0.4, stagger: 0.06, ease: 'back.out(1.4)' }
-      );
-    }, delay);
-  },
-  // Slide in from left
-  slideLeft: (selector, delay = 0) => {
-    setTimeout(() => {
-      const el = document.querySelector(selector);
-      if (!el) return;
-      gsap.fromTo(el, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' });
-    }, delay);
-  },
-  // Count up numbers
-  countUp: (selector, target, delay = 0) => {
-    setTimeout(() => {
-      const el = document.querySelector(selector);
-      if (!el) return;
-      gsap.fromTo(el, { innerText: 0 }, { 
-        innerText: target, 
-        duration: 1.2, 
-        ease: 'power2.out',
-        snap: { innerText: 1 },
-        delay: 0.2
-      });
-    }, delay);
-  },
-  // Progress bar fill
-  fillBar: (selector, width, delay = 0) => {
-    setTimeout(() => {
-      const el = document.querySelector(selector);
-      if (!el) return;
-      gsap.fromTo(el, { width: '0%' }, { width: width, duration: 1, ease: 'power2.out', delay: 0.3 });
-    }, delay);
-  },
-  // Calendar grid entrance
-  calendarIn: (delay = 0) => {
-    setTimeout(() => {
-      const days = document.querySelectorAll('.calendar-day');
-      if (!days.length) return;
-      gsap.fromTo(days, 
-        { opacity: 0, scale: 0.9 }, 
-        { opacity: 1, scale: 1, duration: 0.3, stagger: 0.008, ease: 'power1.out' }
-      );
-    }, delay);
-  },
-  // Topbar slide down
-  topbarIn: (delay = 0) => {
-    setTimeout(() => {
-      const el = document.querySelector('.topbar');
-      if (!el) return;
-      gsap.fromTo(el, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
-    }, delay);
-  }
+  staggerIn: (selector, delay = 0) => { setTimeout(() => { const els = document.querySelectorAll(selector); if (!els.length) return; gsap.fromTo(els, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out' }); }, delay); },
+  fadeIn: (selector, delay = 0) => { setTimeout(() => { const el = document.querySelector(selector); if (!el) return; gsap.fromTo(el, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }); }, delay); },
+  scaleIn: (selector, delay = 0) => { setTimeout(() => { const els = document.querySelectorAll(selector); if (!els.length) return; gsap.fromTo(els, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.4, stagger: 0.06, ease: 'back.out(1.4)' }); }, delay); },
+  slideLeft: (selector, delay = 0) => { setTimeout(() => { const el = document.querySelector(selector); if (!el) return; gsap.fromTo(el, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' }); }, delay); },
+  calendarIn: (delay = 0) => { setTimeout(() => { const days = document.querySelectorAll('.calendar-day'); if (!days.length) return; gsap.fromTo(days, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.3, stagger: 0.008, ease: 'power1.out' }); }, delay); },
+  topbarIn: (delay = 0) => { setTimeout(() => { const el = document.querySelector('.topbar'); if (!el) return; gsap.fromTo(el, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }); }, delay); }
 };
 
-// ─── API HELPER ───
 const API = (() => {
   const base = window.location.origin;
   const getToken = () => localStorage.getItem('cpd_token');
-  
   const request = async (path, opts = {}) => {
     const headers = { 'Content-Type': 'application/json' };
     const token = getToken();
@@ -1127,7 +855,6 @@ const API = (() => {
     if (!res.ok) throw new Error(data.error || 'Error');
     return data;
   };
-
   return {
     login: (email, password) => request('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }),
     me: () => request('/api/auth/me'),
@@ -1144,17 +871,12 @@ const API = (() => {
       const formData = new FormData();
       files.forEach(f => formData.append('fotos', f));
       const token = getToken();
-      const res = await fetch(`${base}/api/formaciones/${id}/fotos`, {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` },
-        body: formData
-      });
+      const res = await fetch(`${base}/api/formaciones/${id}/fotos`, { method: 'POST', headers: { 'Authorization': `Bearer ${token}` }, body: formData });
       return res.json();
     }
   };
 })();
 
-// ─── ICONS ───
 const Icons = {
   Calendar: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>,
   Plus: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14M5 12h14"/></svg>,
@@ -1185,85 +907,53 @@ const ESTADOS = { planificada: 'Planificada', confirmada: 'Confirmada', realizad
 const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 const DIAS = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
 
-// ─── FORMADOR COLORS ───
 const FORMADOR_PALETTE = [
-  { bg: '#EBF5FB', border: '#2874A6', text: '#1B4F72' },  // Azul
-  { bg: '#FEF5E7', border: '#D4880F', text: '#7E5109' },  // Ámbar/Dorado
-  { bg: '#E8F8F5', border: '#1ABC9C', text: '#0E6655' },  // Turquesa
-  { bg: '#F4ECF7', border: '#8E44AD', text: '#6C3483' },  // Violeta
-  { bg: '#FDEBD0', border: '#E67E22', text: '#A04000' },  // Naranja
-  { bg: '#FADBD8', border: '#E74C3C', text: '#922B21' },  // Rojo
-  { bg: '#D5F5E3', border: '#27AE60', text: '#1E8449' },  // Verde
-  { bg: '#EAF2F8', border: '#2980B9', text: '#1A5276' },  // Azul celeste
-  { bg: '#F9EBEA', border: '#CD6155', text: '#943126' },  // Coral
-  { bg: '#E8DAEF', border: '#7D3C98', text: '#5B2C6F' },  // Púrpura oscuro
-  { bg: '#D4EFDF', border: '#229954', text: '#196F3D' },  // Verde esmeralda
-  { bg: '#FCF3CF', border: '#D4AC0D', text: '#9A7D0A' },  // Amarillo
+  { bg: '#FADBD8', border: '#E74C3C', text: '#922B21' },
+  { bg: '#F4ECF7', border: '#8E44AD', text: '#6C3483' },
+  { bg: '#EBF5FB', border: '#2874A6', text: '#1B4F72' },
+  { bg: '#D5F5E3', border: '#27AE60', text: '#1E8449' },
+  { bg: '#FEF5E7', border: '#D4880F', text: '#7E5109' },
+  { bg: '#FDEBD0', border: '#E67E22', text: '#A04000' },
+  { bg: '#E8F8F5', border: '#1ABC9C', text: '#0E6655' },
+  { bg: '#EAF2F8', border: '#2980B9', text: '#1A5276' },
+  { bg: '#F9EBEA', border: '#CD6155', text: '#943126' },
+  { bg: '#E8DAEF', border: '#7D3C98', text: '#5B2C6F' },
+  { bg: '#D4EFDF', border: '#229954', text: '#196F3D' },
+  { bg: '#FCF3CF', border: '#D4AC0D', text: '#9A7D0A' },
 ];
 const getFormadorColor = (formadorId) => {
   if (!formadorId) return { bg: '#F5F5F0', border: '#9C968F', text: '#6B6560' };
   return FORMADOR_PALETTE[(formadorId - 1) % FORMADOR_PALETTE.length];
 };
 
-// ─── TOAST ───
-// ─── SIDEBAR STATS ───
 function SidebarStats({ formaciones, currentDate }) {
   const month = currentDate.getMonth();
   const year = currentDate.getFullYear();
-  
-  const monthFormaciones = (formaciones || []).filter(f => {
-    const fd = new Date(f.fecha + 'T12:00:00');
-    return fd.getMonth() === month && fd.getFullYear() === year;
-  });
-  
+  const monthFormaciones = (formaciones || []).filter(f => { const fd = new Date(f.fecha + 'T12:00:00'); return fd.getMonth() === month && fd.getFullYear() === year; });
   const total = monthFormaciones.length;
   const realizadas = monthFormaciones.filter(f => f.estado === 'realizada').length;
   const confirmadas = monthFormaciones.filter(f => f.estado === 'confirmada').length;
   const planificadas = monthFormaciones.filter(f => f.estado === 'planificada').length;
   const pct = total > 0 ? Math.round(realizadas / total * 100) : 0;
-  
   const MINI_MESES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-  
   return (
     <div className="sidebar-stats">
       <div className="sidebar-stats-title">Resumen {MINI_MESES[month]}</div>
       <div className="sidebar-stats-grid">
-        <div className="sidebar-stat">
-          <div className="sidebar-stat-val gold">{total}</div>
-          <div className="sidebar-stat-lbl">Total</div>
-        </div>
-        <div className="sidebar-stat">
-          <div className="sidebar-stat-val green">{realizadas}</div>
-          <div className="sidebar-stat-lbl">Realizadas</div>
-        </div>
-        <div className="sidebar-stat">
-          <div className="sidebar-stat-val amber">{confirmadas}</div>
-          <div className="sidebar-stat-lbl">Confirmadas</div>
-        </div>
-        <div className="sidebar-stat">
-          <div className="sidebar-stat-val blue">{planificadas}</div>
-          <div className="sidebar-stat-lbl">Planificadas</div>
-        </div>
-        <div className="sidebar-stat full">
-          <div className="sidebar-stat-lbl">Cumplimiento</div>
-          <div className="sidebar-stat-val gold" style={{fontSize:'16px'}}>{pct}%</div>
-        </div>
-        <div style={{gridColumn:'1 / -1', padding:'0 2px'}}>
-          <div className="sidebar-progress">
-            <div className="sidebar-progress-fill" style={{width: `${pct}%`}}></div>
-          </div>
-        </div>
+        <div className="sidebar-stat"><div className="sidebar-stat-val gold">{total}</div><div className="sidebar-stat-lbl">Total</div></div>
+        <div className="sidebar-stat"><div className="sidebar-stat-val green">{realizadas}</div><div className="sidebar-stat-lbl">Realizadas</div></div>
+        <div className="sidebar-stat"><div className="sidebar-stat-val amber">{confirmadas}</div><div className="sidebar-stat-lbl">Confirmadas</div></div>
+        <div className="sidebar-stat"><div className="sidebar-stat-val blue">{planificadas}</div><div className="sidebar-stat-lbl">Planificadas</div></div>
+        <div className="sidebar-stat full"><div className="sidebar-stat-lbl">Cumplimiento</div><div className="sidebar-stat-val gold" style={{fontSize:'16px'}}>{pct}%</div></div>
+        <div style={{gridColumn:'1 / -1', padding:'0 2px'}}><div className="sidebar-progress"><div className="sidebar-progress-fill" style={{width: `${pct}%`}}></div></div></div>
       </div>
     </div>
   );
 }
 
-// ─── MINI CALENDAR SIDEBAR ───
 function MiniCalendar({ currentDate, onDateSelect, formaciones }) {
   const [miniDate, setMiniDate] = useState(new Date(currentDate));
-  
   useEffect(() => { setMiniDate(new Date(currentDate)); }, [currentDate]);
-  
   const miniYear = miniDate.getFullYear();
   const miniMonth = miniDate.getMonth();
   const firstDay = new Date(miniYear, miniMonth, 1);
@@ -1271,52 +961,27 @@ function MiniCalendar({ currentDate, onDateSelect, formaciones }) {
   const startOffset = (firstDay.getDay() + 6) % 7;
   const totalDays = lastDay.getDate();
   const today = new Date();
-  
   const days = [];
   const prevLast = new Date(miniYear, miniMonth, 0).getDate();
   for (let i = startOffset - 1; i >= 0; i--) days.push({ day: prevLast - i, other: true });
   for (let d = 1; d <= totalDays; d++) days.push({ day: d, other: false });
   const remaining = 42 - days.length;
   for (let d = 1; d <= remaining; d++) days.push({ day: d, other: true });
-  
   const daysWithEvents = new Set();
-  (formaciones || []).forEach(f => {
-    const fd = new Date(f.fecha + 'T12:00:00');
-    if (fd.getMonth() === miniMonth && fd.getFullYear() === miniYear) {
-      daysWithEvents.add(fd.getDate());
-    }
-  });
-  
+  (formaciones || []).forEach(f => { const fd = new Date(f.fecha + 'T12:00:00'); if (fd.getMonth() === miniMonth && fd.getFullYear() === miniYear) daysWithEvents.add(fd.getDate()); });
   const selectedDay = currentDate.getDate();
   const selectedMonth = currentDate.getMonth();
   const selectedYear = currentDate.getFullYear();
-  
-  const navMini = (dir) => {
-    const d = new Date(miniDate);
-    d.setMonth(d.getMonth() + dir);
-    setMiniDate(d);
-  };
-  
-  const handleDayClick = (d) => {
-    if (d.other) return;
-    const newDate = new Date(miniYear, miniMonth, d.day);
-    onDateSelect(newDate);
-  };
-  
-  const MINI_MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-  
+  const navMini = (dir) => { const d = new Date(miniDate); d.setMonth(d.getMonth() + dir); setMiniDate(d); };
+  const handleDayClick = (d) => { if (d.other) return; onDateSelect(new Date(miniYear, miniMonth, d.day)); };
+  const MINI_MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
   return (
     <div className="mini-cal">
       <div className="mini-cal-header">
         <div className="mini-cal-title">{MINI_MESES[miniMonth]} {miniYear}</div>
-        <div className="mini-cal-nav">
-          <button onClick={() => navMini(-1)}><Icons.ChevLeft /></button>
-          <button onClick={() => navMini(1)}><Icons.ChevRight /></button>
-        </div>
+        <div className="mini-cal-nav"><button onClick={() => navMini(-1)}><Icons.ChevLeft /></button><button onClick={() => navMini(1)}><Icons.ChevRight /></button></div>
       </div>
-      <div className="mini-cal-weekdays">
-        {['Lu','Ma','Mi','Ju','Vi','Sá','Do'].map(d => <div key={d} className="mini-cal-wd">{d}</div>)}
-      </div>
+      <div className="mini-cal-weekdays">{['Lu','Ma','Mi','Ju','Vi','Sá','Do'].map(d => <div key={d} className="mini-cal-wd">{d}</div>)}</div>
       <div className="mini-cal-days">
         {days.map((d, i) => {
           const isToday = !d.other && d.day === today.getDate() && miniMonth === today.getMonth() && miniYear === today.getFullYear();
@@ -1339,362 +1004,128 @@ function Toast({ message, type, onClose }) {
   return <div className={`toast ${type}`}>{message}</div>;
 }
 
-// ─── LOGIN SCREEN ───
 function LoginScreen({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
-    gsap.fromTo('.login-card', 
-      { opacity: 0, y: 40, scale: 0.92 }, 
-      { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.2)', delay: 0.2 }
-    );
-    gsap.fromTo('.login-brand h1', 
-      { opacity: 0, y: -15 }, 
-      { opacity: 1, y: 0, duration: 0.5, delay: 0.5 }
-    );
-    gsap.fromTo('.login-brand p', 
-      { opacity: 0 }, 
-      { opacity: 1, duration: 0.5, delay: 0.7 }
-    );
-    gsap.fromTo('.form-group', 
-      { opacity: 0, x: -20 }, 
-      { opacity: 1, x: 0, duration: 0.4, stagger: 0.12, delay: 0.8 }
-    );
-    gsap.fromTo('.login-btn', 
-      { opacity: 0, y: 10 }, 
-      { opacity: 1, y: 0, duration: 0.4, delay: 1.2 }
-    );
+    gsap.fromTo('.login-card', { opacity: 0, y: 40, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.2)', delay: 0.2 });
+    gsap.fromTo('.login-brand h1', { opacity: 0, y: -15 }, { opacity: 1, y: 0, duration: 0.5, delay: 0.5 });
+    gsap.fromTo('.login-brand p', { opacity: 0 }, { opacity: 1, duration: 0.5, delay: 0.7 });
+    gsap.fromTo('.form-group', { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, stagger: 0.12, delay: 0.8 });
+    gsap.fromTo('.login-btn', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, delay: 1.2 });
   }, []);
-
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    try {
-      const { token, user } = await API.login(email, password);
-      localStorage.setItem('cpd_token', token);
-      localStorage.setItem('cpd_user', JSON.stringify(user));
-      onLogin(user);
-    } catch (e) {
-      setError(e.message);
-    }
+    e.preventDefault(); setLoading(true); setError('');
+    try { const { token, user } = await API.login(email, password); localStorage.setItem('cpd_token', token); localStorage.setItem('cpd_user', JSON.stringify(user)); onLogin(user); } catch (e) { setError(e.message); }
     setLoading(false);
   };
-
   return (
-    <div className="login-wrapper">
-      <div className="login-card">
-        <div className="login-brand">
-          <h1>Formaciones CPD</h1>
-          <p>Calendario</p>
-        </div>
-        <form className="login-form" onSubmit={handleSubmit}>
-          {error && <div className="login-error">{error}</div>}
-          <div className="form-group">
-            <label className="form-label">Email</label>
-            <input className="form-input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="tu@email.com" required />
-          </div>
-          <div className="form-group">
-            <label className="form-label">Contraseña</label>
-            <input className="form-input" type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" required />
-          </div>
-          <button className="login-btn" type="submit" disabled={loading}>{loading ? 'Ingresando...' : 'Ingresar'}</button>
-        </form>
-      </div>
-    </div>
+    <div className="login-wrapper"><div className="login-card"><div className="login-brand"><h1>Formaciones CPD</h1><p>Calendario</p></div>
+      <form className="login-form" onSubmit={handleSubmit}>
+        {error && <div className="login-error">{error}</div>}
+        <div className="form-group"><label className="form-label">Email</label><input className="form-input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="tu@email.com" required /></div>
+        <div className="form-group"><label className="form-label">Contraseña</label><input className="form-input" type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" required /></div>
+        <button className="login-btn" type="submit" disabled={loading}>{loading ? 'Ingresando...' : 'Ingresar'}</button>
+      </form></div></div>
   );
 }
 
-// ─── FORMACION MODAL ───
 function FormacionModal({ show, onClose, onSave, formacion, users, currentUser }) {
   const emptyForm = { titulo: '', descripcion: '', tipo: 'producto', canal: '', modalidad: '', link_reunion: '', categorias: [], fecha: new Date().toISOString().split('T')[0], hora_inicio: '09:00', hora_fin: '11:00', cadena: '', pdv_nombre: '', pdv_direccion: '', ciudad: '', estado: 'planificada', asistentes_esperados: '', notas: '', formador_id: currentUser?.id };
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
-
-  useEffect(() => {
-    if (formacion) {
-      setForm({ ...emptyForm, ...formacion, asistentes_esperados: formacion.asistentes_esperados || '' });
-    } else {
-      setForm(emptyForm);
-    }
-  }, [formacion, show]);
-
+  useEffect(() => { if (formacion) setForm({ ...emptyForm, ...formacion, asistentes_esperados: formacion.asistentes_esperados || '' }); else setForm(emptyForm); }, [formacion, show]);
   if (!show) return null;
-
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      const payload = { ...form };
-      if (payload.asistentes_esperados === '') delete payload.asistentes_esperados;
-      else payload.asistentes_esperados = parseInt(payload.asistentes_esperados);
-      await onSave(payload);
-    } catch (e) {}
-    setSaving(false);
-  };
-
+  const handleSave = async () => { setSaving(true); try { const payload = { ...form }; if (payload.asistentes_esperados === '') delete payload.asistentes_esperados; else payload.asistentes_esperados = parseInt(payload.asistentes_esperados); await onSave(payload); } catch (e) {} setSaving(false); };
   const set = (k, v) => setForm(prev => ({ ...prev, [k]: v }));
-
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={e => e.stopPropagation()}>
-        <div className="modal-header">
-          <div className="modal-title">{formacion ? 'Editar Formación' : 'Nueva Formación'}</div>
-          <button className="modal-close" onClick={onClose}><Icons.Close /></button>
+    <div className="modal-overlay" onClick={onClose}><div className="modal" onClick={e => e.stopPropagation()}>
+      <div className="modal-header"><div className="modal-title">{formacion ? 'Editar Formación' : 'Nueva Formación'}</div><button className="modal-close" onClick={onClose}><Icons.Close /></button></div>
+      <div className="modal-body">
+        <div className="form-grid">
+          <div className="form-group full"><label className="form-label">Título *</label><input className="form-input" value={form.titulo} onChange={e => set('titulo', e.target.value)} placeholder="Ej: Capacitación CeraVe Limpieza" /></div>
+          <div className="form-group"><label className="form-label">Tipo</label><select className="form-select" value={form.tipo} onChange={e => set('tipo', e.target.value)}>{Object.entries(TIPOS).map(([k,v]) => <option key={k} value={k}>{v}</option>)}</select></div>
+          <div className="form-group"><label className="form-label">Estado</label><select className="form-select" value={form.estado} onChange={e => set('estado', e.target.value)}>{Object.entries(ESTADOS).map(([k,v]) => <option key={k} value={k}>{v}</option>)}</select></div>
+          <div className="form-group"><label className="form-label">Canal</label><select className="form-select" value={form.canal || ''} onChange={e => set('canal', e.target.value)}><option value="">Seleccionar...</option>{Object.entries(CANALES).map(([k,v]) => <option key={k} value={k}>{v}</option>)}</select></div>
+          <div className="form-group"><label className="form-label">Modalidad</label><select className="form-select" value={form.modalidad || ''} onChange={e => set('modalidad', e.target.value)}><option value="">Seleccionar...</option>{Object.entries(MODALIDADES).map(([k,v]) => <option key={k} value={k}>{v}</option>)}</select></div>
+          {form.modalidad === 'virtual' && <div className="form-group full"><label className="form-label">Link de Reunión (Teams / Zoom / Meet)</label><input className="form-input" value={form.link_reunion || ''} onChange={e => set('link_reunion', e.target.value)} placeholder="https://teams.microsoft.com/l/meetup-join/..." /></div>}
+          <div className="form-group full"><label className="form-label">Categorías</label><div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginTop:'4px'}}>{CATEGORIAS_OPCIONES.map(cat => (<label key={cat} style={{display:'flex',alignItems:'center',gap:'6px',cursor:'pointer',fontSize:'14px',padding:'6px 12px',borderRadius:'20px',border:'1px solid var(--border)',background:(form.categorias||[]).includes(cat)?'var(--accent)':'var(--surface)',color:(form.categorias||[]).includes(cat)?'#fff':'var(--text-secondary)',transition:'all 0.15s ease',fontWeight:500}}><input type="checkbox" checked={(form.categorias||[]).includes(cat)} onChange={e => { const cats = form.categorias || []; set('categorias', e.target.checked ? [...cats, cat] : cats.filter(c => c !== cat)); }} style={{display:'none'}} />{cat}</label>))}</div></div>
+          <div className="form-group"><label className="form-label">Fecha *</label><input className="form-input" type="date" value={form.fecha} onChange={e => set('fecha', e.target.value)} /></div>
+          {currentUser?.rol === 'admin' && (<div className="form-group"><label className="form-label">Formador</label><select className="form-select" value={form.formador_id} onChange={e => set('formador_id', parseInt(e.target.value))}>{users.filter(u => u.activo !== false).map(u => <option key={u.id} value={u.id}>{u.nombre}</option>)}</select></div>)}
+          <div className="form-group"><label className="form-label">Hora Inicio</label><input className="form-input" type="time" value={form.hora_inicio} onChange={e => set('hora_inicio', e.target.value)} /></div>
+          <div className="form-group"><label className="form-label">Hora Fin</label><input className="form-input" type="time" value={form.hora_fin} onChange={e => set('hora_fin', e.target.value)} /></div>
+          <div className="form-group"><label className="form-label">Cadena / Cliente</label><input className="form-input" value={form.cadena} onChange={e => set('cadena', e.target.value)} placeholder="Ej: Farmacity" /></div>
+          <div className="form-group"><label className="form-label">PDV / Sucursal</label><input className="form-input" value={form.pdv_nombre} onChange={e => set('pdv_nombre', e.target.value)} placeholder="Ej: Farmacity Cabildo 2100" /></div>
+          <div className="form-group"><label className="form-label">Dirección</label><input className="form-input" value={form.pdv_direccion} onChange={e => set('pdv_direccion', e.target.value)} placeholder="Dirección del PDV" /></div>
+          <div className="form-group"><label className="form-label">Ciudad</label><input className="form-input" value={form.ciudad} onChange={e => set('ciudad', e.target.value)} placeholder="Ej: CABA" /></div>
+          <div className="form-group"><label className="form-label">Asistentes Esperados</label><input className="form-input" type="number" value={form.asistentes_esperados} onChange={e => set('asistentes_esperados', e.target.value)} placeholder="0" /></div>
+          <div className="form-group full"><label className="form-label">Descripción</label><textarea className="form-textarea" value={form.descripcion || ''} onChange={e => set('descripcion', e.target.value)} placeholder="Detalle de la formación..." /></div>
+          <div className="form-group full"><label className="form-label">Notas</label><textarea className="form-textarea" value={form.notas || ''} onChange={e => set('notas', e.target.value)} placeholder="Notas adicionales..." /></div>
         </div>
-        <div className="modal-body">
-          <div className="form-grid">
-            <div className="form-group full">
-              <label className="form-label">Título *</label>
-              <input className="form-input" value={form.titulo} onChange={e => set('titulo', e.target.value)} placeholder="Ej: Capacitación CeraVe Limpieza" />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Tipo</label>
-              <select className="form-select" value={form.tipo} onChange={e => set('tipo', e.target.value)}>
-                {Object.entries(TIPOS).map(([k,v]) => <option key={k} value={k}>{v}</option>)}
-              </select>
-            </div>
-            <div className="form-group">
-              <label className="form-label">Estado</label>
-              <select className="form-select" value={form.estado} onChange={e => set('estado', e.target.value)}>
-                {Object.entries(ESTADOS).map(([k,v]) => <option key={k} value={k}>{v}</option>)}
-              </select>
-            </div>
-            <div className="form-group">
-              <label className="form-label">Canal</label>
-              <select className="form-select" value={form.canal || ''} onChange={e => set('canal', e.target.value)}>
-                <option value="">Seleccionar...</option>
-                {Object.entries(CANALES).map(([k,v]) => <option key={k} value={k}>{v}</option>)}
-              </select>
-            </div>
-            <div className="form-group">
-              <label className="form-label">Modalidad</label>
-              <select className="form-select" value={form.modalidad || ''} onChange={e => set('modalidad', e.target.value)}>
-                <option value="">Seleccionar...</option>
-                {Object.entries(MODALIDADES).map(([k,v]) => <option key={k} value={k}>{v}</option>)}
-              </select>
-            </div>
-            {form.modalidad === 'virtual' && <div className="form-group full">
-              <label className="form-label">Link de Reunión (Teams / Zoom / Meet)</label>
-              <input className="form-input" value={form.link_reunion || ''} onChange={e => set('link_reunion', e.target.value)} placeholder="https://teams.microsoft.com/l/meetup-join/..." />
-            </div>}
-            <div className="form-group full">
-              <label className="form-label">Categorías</label>
-              <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginTop:'4px'}}>
-                {CATEGORIAS_OPCIONES.map(cat => (
-                  <label key={cat} style={{display:'flex',alignItems:'center',gap:'6px',cursor:'pointer',fontSize:'14px',padding:'6px 12px',borderRadius:'20px',border:'1px solid var(--border)',background:(form.categorias||[]).includes(cat)?'var(--accent)':'var(--surface)',color:(form.categorias||[]).includes(cat)?'#fff':'var(--text-secondary)',transition:'all 0.15s ease',fontWeight:500}}>
-                    <input type="checkbox" checked={(form.categorias||[]).includes(cat)} onChange={e => { const cats = form.categorias || []; set('categorias', e.target.checked ? [...cats, cat] : cats.filter(c => c !== cat)); }} style={{display:'none'}} />
-                    {cat}
-                  </label>
-                ))}
-              </div>
-            </div>
-            <div className="form-group">
-              <label className="form-label">Fecha *</label>
-              <input className="form-input" type="date" value={form.fecha} onChange={e => set('fecha', e.target.value)} />
-            </div>
-            {currentUser?.rol === 'admin' && (
-              <div className="form-group">
-                <label className="form-label">Formador</label>
-                <select className="form-select" value={form.formador_id} onChange={e => set('formador_id', parseInt(e.target.value))}>
-                  {users.filter(u => u.activo !== false).map(u => <option key={u.id} value={u.id}>{u.nombre}</option>)}
-                </select>
-              </div>
-            )}
-            <div className="form-group">
-              <label className="form-label">Hora Inicio</label>
-              <input className="form-input" type="time" value={form.hora_inicio} onChange={e => set('hora_inicio', e.target.value)} />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Hora Fin</label>
-              <input className="form-input" type="time" value={form.hora_fin} onChange={e => set('hora_fin', e.target.value)} />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Cadena / Cliente</label>
-              <input className="form-input" value={form.cadena} onChange={e => set('cadena', e.target.value)} placeholder="Ej: Farmacity" />
-            </div>
-            <div className="form-group">
-              <label className="form-label">PDV / Sucursal</label>
-              <input className="form-input" value={form.pdv_nombre} onChange={e => set('pdv_nombre', e.target.value)} placeholder="Ej: Farmacity Cabildo 2100" />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Dirección</label>
-              <input className="form-input" value={form.pdv_direccion} onChange={e => set('pdv_direccion', e.target.value)} placeholder="Dirección del PDV" />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Ciudad</label>
-              <input className="form-input" value={form.ciudad} onChange={e => set('ciudad', e.target.value)} placeholder="Ej: CABA" />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Asistentes Esperados</label>
-              <input className="form-input" type="number" value={form.asistentes_esperados} onChange={e => set('asistentes_esperados', e.target.value)} placeholder="0" />
-            </div>
-            <div className="form-group full">
-              <label className="form-label">Descripción</label>
-              <textarea className="form-textarea" value={form.descripcion || ''} onChange={e => set('descripcion', e.target.value)} placeholder="Detalle de la formación..." />
-            </div>
-            <div className="form-group full">
-              <label className="form-label">Notas</label>
-              <textarea className="form-textarea" value={form.notas || ''} onChange={e => set('notas', e.target.value)} placeholder="Notas adicionales..." />
-            </div>
-          </div>
-          <div className="form-actions">
-            <button className="btn btn-secondary" onClick={onClose}>Cancelar</button>
-            <button className="btn btn-primary" onClick={handleSave} disabled={saving || !form.titulo || !form.fecha}>
-              {saving ? 'Guardando...' : (formacion ? 'Guardar Cambios' : 'Crear Formación')}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+        <div className="form-actions"><button className="btn btn-secondary" onClick={onClose}>Cancelar</button><button className="btn btn-primary" onClick={handleSave} disabled={saving || !form.titulo || !form.fecha}>{saving ? 'Guardando...' : (formacion ? 'Guardar Cambios' : 'Crear Formación')}</button></div>
+      </div></div></div>
   );
 }
 
-// ─── DETAIL MODAL ───
 function DetailModal({ show, formacion, onClose, onEdit, onDelete, onUploadFotos, currentUser }) {
   const fileRef = useRef(null);
   const [uploading, setUploading] = useState(false);
   if (!show || !formacion) return null;
-
   const canEdit = currentUser.rol === 'admin' || formacion.formador_id === currentUser.id;
   const f = formacion;
-
-  const handleUpload = async (e) => {
-    const files = Array.from(e.target.files);
-    if (!files.length) return;
-    setUploading(true);
-    await onUploadFotos(f.id, files);
-    setUploading(false);
-  };
-
+  const handleUpload = async (e) => { const files = Array.from(e.target.files); if (!files.length) return; setUploading(true); await onUploadFotos(f.id, files); setUploading(false); };
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={e => e.stopPropagation()}>
-        <div className="modal-header">
-          <div className="modal-title">{f.titulo}</div>
-          <button className="modal-close" onClick={onClose}><Icons.Close /></button>
-        </div>
-        <div className="modal-body">
-          <div className={`detail-status ${f.estado}`}>
-            <span className="detail-status-dot"></span>
-            {ESTADOS[f.estado]}
+    <div className="modal-overlay" onClick={onClose}><div className="modal" onClick={e => e.stopPropagation()}>
+      <div className="modal-header"><div className="modal-title">{f.titulo}</div><button className="modal-close" onClick={onClose}><Icons.Close /></button></div>
+      <div className="modal-body">
+        <div className={`detail-status ${f.estado}`}><span className="detail-status-dot"></span>{ESTADOS[f.estado]}</div>
+        <div className="detail-info">
+          <div className="detail-row"><div className="detail-icon"><Icons.Calendar /></div><div><div className="detail-label">Fecha</div><div className="detail-value">{new Date(f.fecha + 'T12:00:00').toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</div></div></div>
+          {f.hora_inicio && <div className="detail-row"><div className="detail-icon"><Icons.Clock /></div><div><div className="detail-label">Horario</div><div className="detail-value">{f.hora_inicio?.slice(0,5)}{f.hora_fin ? ` – ${f.hora_fin.slice(0,5)}` : ''}</div></div></div>}
+          <div className="detail-row"><div className="detail-icon"><Icons.Tag /></div><div><div className="detail-label">Tipo</div><div className="detail-value">{TIPOS[f.tipo]}</div></div></div>
+          {f.canal && <div className="detail-row"><div className="detail-icon"><Icons.Tag /></div><div><div className="detail-label">Canal</div><div className="detail-value">{CANALES[f.canal] || f.canal}</div></div></div>}
+          {f.modalidad && <div className="detail-row"><div className="detail-icon"><Icons.Tag /></div><div><div className="detail-label">Modalidad</div><div className="detail-value">{MODALIDADES[f.modalidad] || f.modalidad}</div></div></div>}
+          {f.link_reunion && <div className="detail-row"><div className="detail-icon" style={{background:'var(--info-light)'}}><Icons.Calendar /></div><div><div className="detail-label">Link de Reunión</div><div className="detail-value"><a href={f.link_reunion} target="_blank" rel="noopener noreferrer" style={{color:'var(--info)',textDecoration:'none',fontWeight:600,display:'inline-flex',alignItems:'center',gap:'6px',padding:'6px 14px',background:'var(--info-light)',borderRadius:'8px',fontSize:'13px'}}>Unirse a la reunión ↗</a></div></div></div>}
+          {f.categorias && f.categorias.length > 0 && <div className="detail-row"><div className="detail-icon"><Icons.Tag /></div><div><div className="detail-label">Categorías</div><div className="detail-value" style={{display:'flex',gap:'6px',flexWrap:'wrap'}}>{f.categorias.map(c => <span key={c} style={{padding:'3px 10px',borderRadius:'12px',fontSize:'12px',background:'var(--accent-gold-light)',color:'var(--accent-gold)',fontWeight:600}}>{c}</span>)}</div></div></div>}
+          <div className="detail-row"><div className="detail-icon"><Icons.User /></div><div><div className="detail-label">Formador</div><div className="detail-value">{f.formador?.nombre || '—'}</div></div></div>
+          {(f.cadena || f.pdv_nombre) && <div className="detail-row"><div className="detail-icon"><Icons.MapPin /></div><div><div className="detail-label">Ubicación</div><div className="detail-value">{[f.cadena, f.pdv_nombre, f.ciudad].filter(Boolean).join(' · ')}</div>{f.pdv_direccion && <div style={{fontSize:12,color:'var(--text-muted)',marginTop:2}}>{f.pdv_direccion}</div>}</div></div>}
+          {f.asistentes_esperados && <div className="detail-row"><div className="detail-icon"><Icons.People /></div><div><div className="detail-label">Asistentes</div><div className="detail-value">Esperados: {f.asistentes_esperados}{f.asistentes_reales != null ? ` · Reales: ${f.asistentes_reales}` : ''}</div></div></div>}
+          {f.descripcion && <div style={{marginTop:8}}><div className="detail-label">Descripción</div><p style={{fontSize:14,marginTop:4,color:'var(--text-secondary)'}}>{f.descripcion}</p></div>}
+          {f.notas && <div style={{marginTop:8}}><div className="detail-label">Notas</div><p style={{fontSize:14,marginTop:4,color:'var(--text-secondary)'}}>{f.notas}</p></div>}
+          <div style={{marginTop:12}}>
+            <div className="detail-label" style={{marginBottom:8}}>Fotos</div>
+            {f.fotos && f.fotos.length > 0 && (<div className="fotos-grid">{f.fotos.map((url, i) => (<div key={i} className="foto-thumb"><img src={url} alt={`Foto ${i+1}`} /></div>))}</div>)}
+            {canEdit && (<div className="upload-area" onClick={() => fileRef.current?.click()} style={{marginTop:10}}><Icons.Camera /><p>{uploading ? 'Subiendo...' : 'Click para subir fotos'}</p><input ref={fileRef} type="file" multiple accept="image/*" onChange={handleUpload} style={{display:'none'}} /></div>)}
           </div>
-          <div className="detail-info">
-            <div className="detail-row">
-              <div className="detail-icon"><Icons.Calendar /></div>
-              <div><div className="detail-label">Fecha</div><div className="detail-value">{new Date(f.fecha + 'T12:00:00').toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</div></div>
-            </div>
-            {f.hora_inicio && <div className="detail-row">
-              <div className="detail-icon"><Icons.Clock /></div>
-              <div><div className="detail-label">Horario</div><div className="detail-value">{f.hora_inicio?.slice(0,5)}{f.hora_fin ? ` – ${f.hora_fin.slice(0,5)}` : ''}</div></div>
-            </div>}
-            <div className="detail-row">
-              <div className="detail-icon"><Icons.Tag /></div>
-              <div><div className="detail-label">Tipo</div><div className="detail-value">{TIPOS[f.tipo]}</div></div>
-            </div>
-            {f.canal && <div className="detail-row">
-              <div className="detail-icon"><Icons.Tag /></div>
-              <div><div className="detail-label">Canal</div><div className="detail-value">{CANALES[f.canal] || f.canal}</div></div>
-            </div>}
-            {f.modalidad && <div className="detail-row">
-              <div className="detail-icon"><Icons.Tag /></div>
-              <div><div className="detail-label">Modalidad</div><div className="detail-value">{MODALIDADES[f.modalidad] || f.modalidad}</div></div>
-            </div>}
-            {f.link_reunion && <div className="detail-row">
-              <div className="detail-icon" style={{background:'var(--info-light)'}}><Icons.Calendar /></div>
-              <div><div className="detail-label">Link de Reunión</div><div className="detail-value"><a href={f.link_reunion} target="_blank" rel="noopener noreferrer" style={{color:'var(--info)',textDecoration:'none',fontWeight:600,display:'inline-flex',alignItems:'center',gap:'6px',padding:'6px 14px',background:'var(--info-light)',borderRadius:'8px',fontSize:'13px'}}>Unirse a la reunión ↗</a></div></div>
-            </div>}
-            {f.categorias && f.categorias.length > 0 && <div className="detail-row">
-              <div className="detail-icon"><Icons.Tag /></div>
-              <div><div className="detail-label">Categorías</div><div className="detail-value" style={{display:'flex',gap:'6px',flexWrap:'wrap'}}>{f.categorias.map(c => <span key={c} style={{padding:'3px 10px',borderRadius:'12px',fontSize:'12px',background:'var(--accent-gold-light)',color:'var(--accent-gold)',fontWeight:600}}>{c}</span>)}</div></div>
-            </div>}
-            <div className="detail-row">
-              <div className="detail-icon"><Icons.User /></div>
-              <div><div className="detail-label">Formador</div><div className="detail-value">{f.formador?.nombre || '—'}</div></div>
-            </div>
-            {(f.cadena || f.pdv_nombre) && <div className="detail-row">
-              <div className="detail-icon"><Icons.MapPin /></div>
-              <div><div className="detail-label">Ubicación</div><div className="detail-value">{[f.cadena, f.pdv_nombre, f.ciudad].filter(Boolean).join(' · ')}</div>{f.pdv_direccion && <div style={{fontSize:12,color:'var(--text-muted)',marginTop:2}}>{f.pdv_direccion}</div>}</div>
-            </div>}
-            {f.asistentes_esperados && <div className="detail-row">
-              <div className="detail-icon"><Icons.People /></div>
-              <div><div className="detail-label">Asistentes</div><div className="detail-value">Esperados: {f.asistentes_esperados}{f.asistentes_reales != null ? ` · Reales: ${f.asistentes_reales}` : ''}</div></div>
-            </div>}
-            {f.descripcion && <div style={{marginTop:8}}><div className="detail-label">Descripción</div><p style={{fontSize:14,marginTop:4,color:'var(--text-secondary)'}}>{f.descripcion}</p></div>}
-            {f.notas && <div style={{marginTop:8}}><div className="detail-label">Notas</div><p style={{fontSize:14,marginTop:4,color:'var(--text-secondary)'}}>{f.notas}</p></div>}
-
-            {/* Fotos */}
-            <div style={{marginTop:12}}>
-              <div className="detail-label" style={{marginBottom:8}}>Fotos</div>
-              {f.fotos && f.fotos.length > 0 && (
-                <div className="fotos-grid">
-                  {f.fotos.map((url, i) => (
-                    <div key={i} className="foto-thumb"><img src={url} alt={`Foto ${i+1}`} /></div>
-                  ))}
-                </div>
-              )}
-              {canEdit && (
-                <div className="upload-area" onClick={() => fileRef.current?.click()} style={{marginTop:10}}>
-                  <Icons.Camera />
-                  <p>{uploading ? 'Subiendo...' : 'Click para subir fotos'}</p>
-                  <input ref={fileRef} type="file" multiple accept="image/*" onChange={handleUpload} style={{display:'none'}} />
-                </div>
-              )}
-            </div>
-          </div>
-
-          {canEdit && (
-            <div className="form-actions">
-              <button className="btn btn-danger btn-sm" onClick={() => onDelete(f.id)}>
-                <Icons.Trash /> Eliminar
-              </button>
-              <button className="btn btn-primary" onClick={() => onEdit(f)}>
-                <Icons.Edit /> Editar
-              </button>
-            </div>
-          )}
         </div>
-      </div>
-    </div>
+        {canEdit && (<div className="form-actions"><button className="btn btn-danger btn-sm" onClick={() => onDelete(f.id)}><Icons.Trash /> Eliminar</button><button className="btn btn-primary" onClick={() => onEdit(f)}><Icons.Edit /> Editar</button></div>)}
+      </div></div></div>
   );
 }
 
-// ─── USER MODAL ───
 function UserModal({ show, onClose, onSave }) {
   const [form, setForm] = useState({ nombre: '', email: '', password: '', rol: 'formador' });
   if (!show) return null;
   const set = (k, v) => setForm(prev => ({ ...prev, [k]: v }));
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal" onClick={e => e.stopPropagation()} style={{maxWidth:420}}>
-        <div className="modal-header">
-          <div className="modal-title">Nuevo Usuario</div>
-          <button className="modal-close" onClick={onClose}><Icons.Close /></button>
+    <div className="modal-overlay" onClick={onClose}><div className="modal" onClick={e => e.stopPropagation()} style={{maxWidth:420}}>
+      <div className="modal-header"><div className="modal-title">Nuevo Usuario</div><button className="modal-close" onClick={onClose}><Icons.Close /></button></div>
+      <div className="modal-body">
+        <div style={{display:'flex',flexDirection:'column',gap:16}}>
+          <div className="form-group"><label className="form-label">Nombre</label><input className="form-input" value={form.nombre} onChange={e => set('nombre', e.target.value)} /></div>
+          <div className="form-group"><label className="form-label">Email</label><input className="form-input" type="email" value={form.email} onChange={e => set('email', e.target.value)} /></div>
+          <div className="form-group"><label className="form-label">Contraseña</label><input className="form-input" type="password" value={form.password} onChange={e => set('password', e.target.value)} /></div>
+          <div className="form-group"><label className="form-label">Rol</label><select className="form-select" value={form.rol} onChange={e => set('rol', e.target.value)}><option value="formador">Formador</option><option value="admin">Admin</option></select></div>
         </div>
-        <div className="modal-body">
-          <div style={{display:'flex',flexDirection:'column',gap:16}}>
-            <div className="form-group"><label className="form-label">Nombre</label><input className="form-input" value={form.nombre} onChange={e => set('nombre', e.target.value)} /></div>
-            <div className="form-group"><label className="form-label">Email</label><input className="form-input" type="email" value={form.email} onChange={e => set('email', e.target.value)} /></div>
-            <div className="form-group"><label className="form-label">Contraseña</label><input className="form-input" type="password" value={form.password} onChange={e => set('password', e.target.value)} /></div>
-            <div className="form-group"><label className="form-label">Rol</label><select className="form-select" value={form.rol} onChange={e => set('rol', e.target.value)}><option value="formador">Formador</option><option value="admin">Admin</option></select></div>
-          </div>
-          <div className="form-actions">
-            <button className="btn btn-secondary" onClick={onClose}>Cancelar</button>
-            <button className="btn btn-primary" onClick={() => onSave(form)} disabled={!form.nombre || !form.email || !form.password}>Crear Usuario</button>
-          </div>
-        </div>
-      </div>
-    </div>
+        <div className="form-actions"><button className="btn btn-secondary" onClick={onClose}>Cancelar</button><button className="btn btn-primary" onClick={() => onSave(form)} disabled={!form.nombre || !form.email || !form.password}>Crear Usuario</button></div>
+      </div></div></div>
   );
 }
 
-// ─── MAIN APP ───
 function App() {
-  const [user, setUser] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('cpd_user')); } catch { return null; }
-  });
+  const [user, setUser] = useState(() => { try { return JSON.parse(localStorage.getItem('cpd_user')); } catch { return null; } });
   const [page, setPage] = useState('calendario');
   const [view, setView] = useState('month');
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -1714,176 +1145,52 @@ function App() {
   const showToast = (message, type = 'success') => setToast({ message, type });
 
   const loadFormaciones = useCallback(async () => {
-    try {
-      const m = currentDate.getMonth() + 1;
-      const y = currentDate.getFullYear();
-      const params = { mes: m, anio: y };
-      if (filterEstado) params.estado = filterEstado;
-      if (filterFormador) params.formador_id = filterFormador;
-      const data = await API.getFormaciones(params);
-      setFormaciones(data);
-    } catch (e) { console.error(e); }
+    try { const m = currentDate.getMonth() + 1; const y = currentDate.getFullYear(); const params = { mes: m, anio: y }; if (filterEstado) params.estado = filterEstado; if (filterFormador) params.formador_id = filterFormador; const data = await API.getFormaciones(params); setFormaciones(data); } catch (e) { console.error(e); }
   }, [currentDate, filterEstado, filterFormador]);
 
-  const loadUsers = async () => {
-    try { const data = await API.getUsers(); setUsers(data); } catch (e) {}
-  };
+  const loadUsers = async () => { try { const data = await API.getUsers(); setUsers(data); } catch (e) {} };
 
-  const loadStats = async () => {
-    try {
-      const m = currentDate.getMonth() + 1;
-      const y = currentDate.getFullYear();
-      const data = await API.getStats({ mes: m, anio: y });
-      setStats(data);
-    } catch (e) {}
-  };
+  const loadStats = async () => { try { const m = currentDate.getMonth() + 1; const y = currentDate.getFullYear(); const data = await API.getStats({ mes: m, anio: y }); setStats(data); } catch (e) {} };
 
   useEffect(() => { if (user) { loadFormaciones(); loadUsers(); } }, [user, currentDate, filterEstado, filterFormador]);
   useEffect(() => { if (user && page === 'estadisticas') loadStats(); }, [page, currentDate]);
 
-  // ─── GSAP: Animate on page/view change ───
-  useEffect(() => {
-    if (!user) return;
-    gsapAnimate.topbarIn(50);
-    if (page === 'calendario') {
-      gsapAnimate.fadeIn('.calendar-header', 100);
-      setTimeout(() => gsapAnimate.calendarIn(0), 200);
-    } else if (page === 'estadisticas') {
-      gsapAnimate.staggerIn('.stat-card', 100);
-      gsapAnimate.staggerIn('.table-wrapper', 400);
-    } else if (page === 'equipo') {
-      gsapAnimate.fadeIn('.table-wrapper', 100);
-    }
-  }, [page, view, user]);
+  useEffect(() => { if (!user) return; gsapAnimate.topbarIn(50); if (page === 'calendario') { gsapAnimate.fadeIn('.calendar-header', 100); setTimeout(() => gsapAnimate.calendarIn(0), 200); } else if (page === 'estadisticas') { gsapAnimate.staggerIn('.stat-card', 100); gsapAnimate.staggerIn('.table-wrapper', 400); } else if (page === 'equipo') { gsapAnimate.fadeIn('.table-wrapper', 100); } }, [page, view, user]);
+  useEffect(() => { if (!user || page !== 'calendario') return; if (view === 'month') gsapAnimate.calendarIn(50); else if (view === 'week') gsapAnimate.staggerIn('.weekly-column', 50); }, [currentDate, view]);
+  useEffect(() => { if (!user) return; gsapAnimate.scaleIn('.sidebar-stat', 200); }, [formaciones]);
 
-  // ─── GSAP: Animate calendar on month/week navigation ───
-  useEffect(() => {
-    if (!user || page !== 'calendario') return;
-    if (view === 'month') {
-      gsapAnimate.calendarIn(50);
-    } else if (view === 'week') {
-      gsapAnimate.staggerIn('.weekly-column', 50);
-    }
-  }, [currentDate, view]);
+  const handleSaveFormacion = async (data) => { try { if (editingFormacion?.id) { await API.updateFormacion(editingFormacion.id, data); showToast('Formación actualizada'); } else { await API.createFormacion(data); showToast('Formación creada'); } setShowModal(false); setEditingFormacion(null); loadFormaciones(); } catch (e) { showToast(e.message, 'error'); } };
+  const handleDelete = async (id) => { if (!confirm('¿Eliminar esta formación?')) return; try { await API.deleteFormacion(id); showToast('Formación eliminada'); setShowDetail(false); loadFormaciones(); } catch (e) { showToast(e.message, 'error'); } };
+  const handleUploadFotos = async (id, files) => { try { await API.uploadFotos(id, files); showToast('Fotos subidas'); const updated = await API.getFormacion(id); setSelectedFormacion(updated); loadFormaciones(); } catch (e) { showToast(e.message, 'error'); } };
+  const handleCreateUser = async (data) => { try { await API.createUser(data); showToast('Usuario creado'); setShowUserModal(false); loadUsers(); } catch (e) { showToast(e.message, 'error'); } };
 
-  // ─── GSAP: Animate sidebar stats ───
-  useEffect(() => {
-    if (!user) return;
-    gsapAnimate.scaleIn('.sidebar-stat', 200);
-  }, [formaciones]);
-
-  const handleSaveFormacion = async (data) => {
-    try {
-      if (editingFormacion?.id) {
-        await API.updateFormacion(editingFormacion.id, data);
-        showToast('Formación actualizada');
-      } else {
-        await API.createFormacion(data);
-        showToast('Formación creada');
-      }
-      setShowModal(false);
-      setEditingFormacion(null);
-      loadFormaciones();
-    } catch (e) { showToast(e.message, 'error'); }
-  };
-
-  const handleDelete = async (id) => {
-    if (!confirm('¿Eliminar esta formación?')) return;
-    try {
-      await API.deleteFormacion(id);
-      showToast('Formación eliminada');
-      setShowDetail(false);
-      loadFormaciones();
-    } catch (e) { showToast(e.message, 'error'); }
-  };
-
-  const handleUploadFotos = async (id, files) => {
-    try {
-      await API.uploadFotos(id, files);
-      showToast('Fotos subidas');
-      const updated = await API.getFormacion(id);
-      setSelectedFormacion(updated);
-      loadFormaciones();
-    } catch (e) { showToast(e.message, 'error'); }
-  };
-
-  const handleCreateUser = async (data) => {
-    try {
-      await API.createUser(data);
-      showToast('Usuario creado');
-      setShowUserModal(false);
-      loadUsers();
-    } catch (e) { showToast(e.message, 'error'); }
-  };
-
-  const logout = () => {
-    localStorage.removeItem('cpd_token');
-    localStorage.removeItem('cpd_user');
-    setUser(null);
-  };
+  const logout = () => { localStorage.removeItem('cpd_token'); localStorage.removeItem('cpd_user'); setUser(null); };
 
   const exportToExcel = async () => {
     try {
-      const m = currentDate.getMonth() + 1;
-      const y = currentDate.getFullYear();
-      const params = { mes: m, anio: y };
-      if (filterEstado) params.estado = filterEstado;
-      if (filterFormador) params.formador_id = filterFormador;
+      const m = currentDate.getMonth() + 1; const y = currentDate.getFullYear(); const params = { mes: m, anio: y };
+      if (filterEstado) params.estado = filterEstado; if (filterFormador) params.formador_id = filterFormador;
       const token = localStorage.getItem('cpd_token');
-      const res = await fetch(`${window.location.origin}/api/export?${new URLSearchParams(params)}`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const res = await fetch(`${window.location.origin}/api/export?${new URLSearchParams(params)}`, { headers: { 'Authorization': `Bearer ${token}` } });
       const rows = await res.json();
       if (!rows.length) { showToast('No hay datos para exportar', 'error'); return; }
-
       const headers = Object.keys(rows[0]);
-      const csvContent = [
-        headers.join(';'),
-        ...rows.map(row => headers.map(h => {
-          let val = row[h] != null ? String(row[h]) : '';
-          val = val.replace(/"/g, '""');
-          if (val.includes(';') || val.includes('"') || val.includes('\n')) val = `"${val}"`;
-          return val;
-        }).join(';'))
-      ].join('\n');
-
+      const csvContent = [headers.join(';'), ...rows.map(row => headers.map(h => { let val = row[h] != null ? String(row[h]) : ''; val = val.replace(/"/g, '""'); if (val.includes(';') || val.includes('"') || val.includes('\n')) val = `"${val}"`; return val; }).join(';'))].join('\n');
       const BOM = '\uFEFF';
       const blob = new Blob([BOM + csvContent], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `Formaciones_CPD_${MESES[currentDate.getMonth()]}_${currentDate.getFullYear()}.csv`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      const a = document.createElement('a'); a.href = url; a.download = `Formaciones_CPD_${MESES[currentDate.getMonth()]}_${currentDate.getFullYear()}.csv`;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
       showToast('Excel exportado correctamente');
-    } catch (e) {
-      showToast('Error al exportar: ' + e.message, 'error');
-    }
+    } catch (e) { showToast('Error al exportar: ' + e.message, 'error'); }
   };
 
-  const navMonth = (dir) => {
-    const d = new Date(currentDate);
-    d.setMonth(d.getMonth() + dir);
-    setCurrentDate(d);
-  };
-
-  const navWeek = (dir) => {
-    const d = new Date(currentDate);
-    d.setDate(d.getDate() + (7 * dir));
-    setCurrentDate(d);
-  };
-
-  const navDay = (dir) => {
-    const d = new Date(currentDate);
-    d.setDate(d.getDate() + dir);
-    setCurrentDate(d);
-  };
+  const navMonth = (dir) => { const d = new Date(currentDate); d.setMonth(d.getMonth() + dir); setCurrentDate(d); };
+  const navWeek = (dir) => { const d = new Date(currentDate); d.setDate(d.getDate() + (7 * dir)); setCurrentDate(d); };
+  const navDay = (dir) => { const d = new Date(currentDate); d.setDate(d.getDate() + dir); setCurrentDate(d); };
 
   if (!user) return <LoginScreen onLogin={setUser} />;
 
-  // Calendar helpers
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   const firstDay = new Date(year, month, 1);
@@ -1893,46 +1200,21 @@ function App() {
   const today = new Date();
 
   const calendarDays = [];
-  // Previous month days
   const prevLast = new Date(year, month, 0).getDate();
   for (let i = startOffset - 1; i >= 0; i--) calendarDays.push({ day: prevLast - i, month: month - 1, otherMonth: true });
-  // Current month
   for (let d = 1; d <= totalDays; d++) calendarDays.push({ day: d, month: month, otherMonth: false });
-  // Next month fill
   const remaining = 42 - calendarDays.length;
   for (let d = 1; d <= remaining; d++) calendarDays.push({ day: d, month: month + 1, otherMonth: true });
 
   const getEventsForDay = (day, mon) => {
     const y = mon < 0 ? year - 1 : (mon > 11 ? year + 1 : year);
     const m = ((mon % 12) + 12) % 12;
-    return formaciones.filter(f => {
-      const fd = new Date(f.fecha + 'T12:00:00');
-      return fd.getDate() === day && fd.getMonth() === m && fd.getFullYear() === y;
-    });
+    return formaciones.filter(f => { const fd = new Date(f.fecha + 'T12:00:00'); return fd.getDate() === day && fd.getMonth() === m && fd.getFullYear() === y; });
   };
 
-  // Week view helpers
-  const getWeekDays = () => {
-    const d = new Date(currentDate);
-    const dayOfWeek = (d.getDay() + 6) % 7;
-    const monday = new Date(d);
-    monday.setDate(d.getDate() - dayOfWeek);
-    const days = [];
-    for (let i = 0; i < 7; i++) {
-      const wd = new Date(monday);
-      wd.setDate(monday.getDate() + i);
-      days.push(wd);
-    }
-    return days;
-  };
-
+  const getWeekDays = () => { const d = new Date(currentDate); const dayOfWeek = (d.getDay() + 6) % 7; const monday = new Date(d); monday.setDate(d.getDate() - dayOfWeek); const days = []; for (let i = 0; i < 7; i++) { const wd = new Date(monday); wd.setDate(monday.getDate() + i); days.push(wd); } return days; };
   const weekDays = getWeekDays();
-  const getWeekLabel = () => {
-    const start = weekDays[0];
-    const end = weekDays[6];
-    if (start.getMonth() === end.getMonth()) return `${start.getDate()} – ${end.getDate()} ${MESES[start.getMonth()]} ${start.getFullYear()}`;
-    return `${start.getDate()} ${MESES[start.getMonth()].slice(0,3)} – ${end.getDate()} ${MESES[end.getMonth()].slice(0,3)} ${start.getFullYear()}`;
-  };
+  const getWeekLabel = () => { const start = weekDays[0]; const end = weekDays[6]; if (start.getMonth() === end.getMonth()) return `${start.getDate()} – ${end.getDate()} ${MESES[start.getMonth()]} ${start.getFullYear()}`; return `${start.getDate()} ${MESES[start.getMonth()].slice(0,3)} – ${end.getDate()} ${MESES[end.getMonth()].slice(0,3)} ${start.getFullYear()}`; };
 
   const openDetail = (f) => { setSelectedFormacion(f); setShowDetail(true); };
   const openEdit = (f) => { setShowDetail(false); setEditingFormacion(f); setShowModal(true); };
@@ -1940,7 +1222,6 @@ function App() {
 
   const pageTitles = { calendario: 'Calendario', estadisticas: 'Estadísticas', equipo: 'Equipo' };
 
-  // ─── GSAP: Sidebar entrance on first load ───
   useEffect(() => {
     if (!user) return;
     gsap.fromTo('.sidebar-header', { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, delay: 0.1, ease: 'power2.out' });
@@ -1952,59 +1233,35 @@ function App() {
 
   return (
     <div className="app-shell">
-      {/* Sidebar */}
       <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <div className="sidebar-header">
-          <div className="sidebar-brand">Formaciones CPD</div>
-          <div className="sidebar-sub">L'Oréal · Nexxbio</div>
-        </div>
+        <div className="sidebar-header"><div className="sidebar-brand">Formaciones CPD</div><div className="sidebar-sub">L'Oréal · Nexxbio</div></div>
         <div className="sidebar-nav">
-          <div className={`nav-item ${page === 'calendario' ? 'active' : ''}`} onClick={() => { setPage('calendario'); setSidebarOpen(false); }}>
-            <Icons.Calendar /> Calendario
-          </div>
-          <div className={`nav-item ${page === 'estadisticas' ? 'active' : ''}`} onClick={() => { setPage('estadisticas'); setSidebarOpen(false); }}>
-            <Icons.Chart /> Estadísticas
-          </div>
-          {user.rol === 'admin' && (
-            <div className={`nav-item ${page === 'equipo' ? 'active' : ''}`} onClick={() => { setPage('equipo'); setSidebarOpen(false); }}>
-              <Icons.Users /> Equipo
-            </div>
-          )}
+          <div className={`nav-item ${page === 'calendario' ? 'active' : ''}`} onClick={() => { setPage('calendario'); setSidebarOpen(false); }}><Icons.Calendar /> Calendario</div>
+          <div className={`nav-item ${page === 'estadisticas' ? 'active' : ''}`} onClick={() => { setPage('estadisticas'); setSidebarOpen(false); }}><Icons.Chart /> Estadísticas</div>
+          {user.rol === 'admin' && (<div className={`nav-item ${page === 'equipo' ? 'active' : ''}`} onClick={() => { setPage('equipo'); setSidebarOpen(false); }}><Icons.Users /> Equipo</div>)}
         </div>
         <SidebarStats formaciones={formaciones} currentDate={currentDate} />
         <MiniCalendar currentDate={currentDate} onDateSelect={(d) => { setCurrentDate(d); setPage('calendario'); }} formaciones={formaciones} />
         <div className="sidebar-footer">
           <div className="user-info">
             <div className="user-avatar">{user.nombre?.charAt(0)}</div>
-            <div>
-              <div className="user-name">{user.nombre}</div>
-              <div className="user-role">{user.rol}</div>
-            </div>
+            <div><div className="user-name">{user.nombre}</div><div className="user-role">{user.rol}</div></div>
           </div>
-          <div className="nav-item" onClick={logout} style={{marginTop:4}}>
-            <Icons.Logout /> Cerrar Sesión
+          <div style={{padding:'8px 14px',display:'flex',alignItems:'center',gap:'8px',marginBottom:'4px'}}>
+            <div style={{width:'8px',height:'8px',borderRadius:'50%',background:'#E63329',flexShrink:0}}></div>
+            <span style={{fontSize:'12px',color:'rgba(255,255,255,0.7)',fontWeight:500}}>Diego Ferrandello</span>
+            <span style={{fontSize:'11px',color:'rgba(255,255,255,0.35)'}}>· Operations Manager</span>
           </div>
+          <div className="nav-item" onClick={logout} style={{marginTop:4}}><Icons.Logout /> Cerrar Sesión</div>
         </div>
       </div>
 
-      {/* Main */}
       <div className="main-content">
         <div className="topbar">
-          <div style={{display:'flex',alignItems:'center',gap:12}}>
-            <button className="mobile-menu-btn" onClick={() => setSidebarOpen(!sidebarOpen)}><Icons.Menu /></button>
-            <div className="topbar-title">{pageTitles[page]}</div>
-          </div>
-          <div className="topbar-actions">
-            <button className="btn btn-secondary" onClick={exportToExcel}>
-              <Icons.Download /> Exportar Excel
-            </button>
-            <button className="btn btn-primary" onClick={() => openNew()}>
-              <Icons.Plus /> Nueva Formación
-            </button>
-          </div>
+          <div style={{display:'flex',alignItems:'center',gap:12}}><button className="mobile-menu-btn" onClick={() => setSidebarOpen(!sidebarOpen)}><Icons.Menu /></button><div className="topbar-title">{pageTitles[page]}</div></div>
+          <div className="topbar-actions"><button className="btn btn-secondary" onClick={exportToExcel}><Icons.Download /> Exportar Excel</button><button className="btn btn-primary" onClick={() => openNew()}><Icons.Plus /> Nueva Formación</button></div>
         </div>
 
-        {/* CALENDAR PAGE */}
         {page === 'calendario' && (
           <div className="calendar-container">
             <div className="calendar-header">
@@ -2017,9 +1274,7 @@ function App() {
               <div style={{display:'flex',gap:12,alignItems:'center',flexWrap:'wrap'}}>
                 <div className="calendar-filters">
                   <span className={`filter-chip ${!filterEstado ? 'active' : ''}`} onClick={() => setFilterEstado('')}>Todas</span>
-                  {Object.entries(ESTADOS).map(([k,v]) => (
-                    <span key={k} className={`filter-chip ${filterEstado === k ? 'active' : ''}`} onClick={() => setFilterEstado(filterEstado === k ? '' : k)}>{v}</span>
-                  ))}
+                  {Object.entries(ESTADOS).map(([k,v]) => (<span key={k} className={`filter-chip ${filterEstado === k ? 'active' : ''}`} onClick={() => setFilterEstado(filterEstado === k ? '' : k)}>{v}</span>))}
                 </div>
                 <select className="form-select" value={filterFormador} onChange={e => setFilterFormador(e.target.value)} style={{padding:'6px 12px',fontSize:'12px',borderRadius:'20px',border:'1px solid var(--border)',minWidth:'160px',fontWeight:500}}>
                   <option value="">Todos los formadores</option>
@@ -2036,9 +1291,7 @@ function App() {
             {view === 'month' ? (
               <React.Fragment>
               <div className="calendar-grid">
-                <div className="calendar-weekdays">
-                  {DIAS.map(d => <div key={d} className="weekday">{d}</div>)}
-                </div>
+                <div className="calendar-weekdays">{DIAS.map(d => <div key={d} className="weekday">{d}</div>)}</div>
                 <div className="calendar-days">
                   {calendarDays.map((cd, i) => {
                     const events = getEventsForDay(cd.day, cd.month);
@@ -2051,13 +1304,7 @@ function App() {
                           {events.slice(0, 3).map(ev => {
                             const fc = getFormadorColor(ev.formador_id);
                             const estadoIcons = { planificada: '○', confirmada: '◉', realizada: '✓', cancelada: '✕' };
-                            return (
-                              <div key={ev.id} className={`day-event ${ev.estado}`} onClick={() => openDetail(ev)}
-                                style={{background: fc.bg, color: fc.text, borderLeftColor: fc.border}}>
-                                <span className="day-event-estado">{estadoIcons[ev.estado] || ''}</span>
-                                {ev.hora_inicio?.slice(0,5)} {ev.titulo}
-                              </div>
-                            );
+                            return (<div key={ev.id} className={`day-event ${ev.estado}`} onClick={() => openDetail(ev)} style={{background: fc.bg, color: fc.text, borderLeftColor: fc.border}}><span className="day-event-estado">{estadoIcons[ev.estado] || ''}</span>{ev.hora_inicio?.slice(0,5)} {ev.titulo}</div>);
                           })}
                           {events.length > 3 && <div className="day-more">+{events.length - 3} más</div>}
                         </div>
@@ -2066,149 +1313,67 @@ function App() {
                   })}
                 </div>
               </div>
-              {/* Formador Legend */}
+              {/* ===== MODIFIED LEGEND: Separated by Formadores & Administradores ===== */}
               <div style={{display:'flex',flexWrap:'wrap',gap:'12px',marginTop:'12px',padding:'10px 16px',background:'var(--surface)',borderRadius:'var(--radius)',border:'1px solid var(--border-light)',alignItems:'center'}}>
                 <span style={{fontSize:'11px',fontWeight:600,color:'var(--text-muted)',textTransform:'uppercase',letterSpacing:'1px',marginRight:'4px'}}>Formadores:</span>
-                {users.filter(u => u.activo !== false && u.rol === 'formador').map(u => {<span style={{width:'1px',height:'20px',background:'var(--border)',margin:'0 8px'}}></span>
+                {users.filter(u => u.activo !== false && u.rol === 'formador').map(u => {
+                  const fc = getFormadorColor(u.id);
+                  return (<div key={u.id} style={{display:'flex',alignItems:'center',gap:'6px',fontSize:'12px',fontWeight:500}}><div style={{width:'10px',height:'10px',borderRadius:'50%',background:fc.border,flexShrink:0}}></div><span style={{color:fc.text}}>{u.nombre}</span></div>);
+                })}
+                <span style={{width:'1px',height:'20px',background:'var(--border)',margin:'0 8px'}}></span>
                 <span style={{fontSize:'11px',fontWeight:600,color:'var(--text-muted)',textTransform:'uppercase',letterSpacing:'1px',marginRight:'4px'}}>Administradores:</span>
                 {users.filter(u => u.activo !== false && u.rol === 'admin').map(u => {
                   const fc = getFormadorColor(u.id);
-                  return (
-                    <div key={u.id} style={{display:'flex',alignItems:'center',gap:'6px',fontSize:'12px',fontWeight:500}}>
-                      <div style={{width:'10px',height:'10px',borderRadius:'50%',background:fc.border,flexShrink:0}}></div>
-                      <span style={{color:fc.text}}>{u.nombre}</span>
-                    </div>
-                  );
-                })}
-```
-
-**Cambio 2 — Buscá:**
-```
-<div className="nav-item" onClick={logout}
-                  const fc = getFormadorColor(u.id);
-                  return (
-                    <div key={u.id} style={{display:'flex',alignItems:'center',gap:'6px',fontSize:'12px',fontWeight:500}}>
-                      <div style={{width:'10px',height:'10px',borderRadius:'50%',background:fc.border,flexShrink:0}}></div>
-                      <span style={{color:fc.text}}>{u.nombre}</span>
-                    </div>
-                  );
+                  return (<div key={u.id} style={{display:'flex',alignItems:'center',gap:'6px',fontSize:'12px',fontWeight:500}}><div style={{width:'10px',height:'10px',borderRadius:'50%',background:fc.border,flexShrink:0}}></div><span style={{color:fc.text}}>{u.nombre}</span></div>);
                 })}
                 <span style={{fontSize:'10px',color:'var(--text-muted)',marginLeft:'auto',display:'flex',gap:'10px',alignItems:'center'}}>
                   <span>○ Planificada</span><span>◉ Confirmada</span><span>✓ Realizada</span><span>✕ Cancelada</span>
                 </span>
               </div>
               </React.Fragment>
-            ) : (
+            ) : view === 'week' ? (
               <div className="weekly-grid">
                 <div className="weekly-header">
                   {weekDays.map((wd, i) => {
                     const isToday = wd.toDateString() === today.toDateString();
-                    return (
-                      <div key={i} className={`weekly-day-header ${isToday ? 'today' : ''}`}>
-                        <div className="weekly-day-name">{DIAS[i]}</div>
-                        <div className="weekly-day-num">{wd.getDate()}</div>
-                      </div>
-                    );
+                    return (<div key={i} className={`weekly-day-header ${isToday ? 'today' : ''}`}><div className="weekly-day-name">{DIAS[i]}</div><div className="weekly-day-num">{wd.getDate()}</div></div>);
                   })}
                 </div>
                 <div className="weekly-body">
                   {weekDays.map((wd, i) => {
-                    const events = formaciones.filter(f => {
-                      const fd = new Date(f.fecha + 'T12:00:00');
-                      return fd.toDateString() === wd.toDateString();
-                    });
-                    return (
-                      <div key={i} className="weekly-column">
-                        {events.map(ev => {
-                          const fc = getFormadorColor(ev.formador_id);
-                          return (
-                            <div key={ev.id} className={`weekly-event ${ev.estado}`} onClick={() => openDetail(ev)}
-                              style={{background: fc.bg, borderLeftColor: fc.border, color: fc.text}}>
-                              <div className="weekly-event-time">{ev.hora_inicio?.slice(0,5)}{ev.hora_fin ? ` – ${ev.hora_fin.slice(0,5)}` : ''}</div>
-                              <div className="weekly-event-title">{ev.titulo}</div>
-                              <div className="weekly-event-loc">{[ev.formador?.nombre, ev.cadena, ev.pdv_nombre].filter(Boolean).join(' · ')}</div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    );
+                    const events = formaciones.filter(f => { const fd = new Date(f.fecha + 'T12:00:00'); return fd.toDateString() === wd.toDateString(); });
+                    return (<div key={i} className="weekly-column">{events.map(ev => { const fc = getFormadorColor(ev.formador_id); return (<div key={ev.id} className={`weekly-event ${ev.estado}`} onClick={() => openDetail(ev)} style={{background: fc.bg, borderLeftColor: fc.border, color: fc.text}}><div className="weekly-event-time">{ev.hora_inicio?.slice(0,5)}{ev.hora_fin ? ` – ${ev.hora_fin.slice(0,5)}` : ''}</div><div className="weekly-event-title">{ev.titulo}</div><div className="weekly-event-loc">{[ev.formador?.nombre, ev.cadena, ev.pdv_nombre].filter(Boolean).join(' · ')}</div></div>); })}</div>);
                   })}
                 </div>
               </div>
-            )}
+            ) : null}
 
             {view === 'day' && (() => {
               const HOURS = Array.from({ length: 13 }, (_, i) => i + 8);
-              const dayEvents = formaciones.filter(f => {
-                const fd = new Date(f.fecha + 'T12:00:00');
-                return fd.toDateString() === currentDate.toDateString();
-              });
+              const dayEvents = formaciones.filter(f => { const fd = new Date(f.fecha + 'T12:00:00'); return fd.toDateString() === currentDate.toDateString(); });
               const formadores = [...new Map(dayEvents.map(e => [e.formador?.id, e.formador])).values()].filter(Boolean);
               if (formadores.length === 0 && dayEvents.length === 0) {
-                return (
-                  <div style={{background:'var(--surface)',borderRadius:'var(--radius-lg)',border:'1px solid var(--border-light)',padding:'60px 20px',textAlign:'center',boxShadow:'var(--shadow-sm)'}}>
-                    <div style={{fontSize:'48px',marginBottom:'12px'}}>📭</div>
-                    <div style={{fontSize:'16px',fontWeight:600,color:'var(--text)'}}>Sin formaciones este día</div>
-                    <div style={{fontSize:'13px',color:'var(--text-muted)',marginTop:'6px'}}>Hacé doble click en un día del calendario mensual o creá una nueva formación</div>
-                  </div>
-                );
+                return (<div style={{background:'var(--surface)',borderRadius:'var(--radius-lg)',border:'1px solid var(--border-light)',padding:'60px 20px',textAlign:'center',boxShadow:'var(--shadow-sm)'}}><div style={{fontSize:'48px',marginBottom:'12px'}}>📭</div><div style={{fontSize:'16px',fontWeight:600,color:'var(--text)'}}>Sin formaciones este día</div><div style={{fontSize:'13px',color:'var(--text-muted)',marginTop:'6px'}}>Hacé doble click en un día del calendario mensual o creá una nueva formación</div></div>);
               }
               const allFormadores = users.filter(u => u.activo !== false && (u.rol === 'formador' || dayEvents.some(e => e.formador_id === u.id)));
               const displayFormadores = allFormadores.length > 0 ? allFormadores : formadores;
-
-              const getEventStyle = (ev) => {
-                const startH = ev.hora_inicio ? parseInt(ev.hora_inicio.split(':')[0]) : 8;
-                const startM = ev.hora_inicio ? parseInt(ev.hora_inicio.split(':')[1]) : 0;
-                const endH = ev.hora_fin ? parseInt(ev.hora_fin.split(':')[0]) : startH + 1;
-                const endM = ev.hora_fin ? parseInt(ev.hora_fin.split(':')[1]) : 0;
-                const top = ((startH - 8) * 60 + startM) * (60/60);
-                const height = Math.max(((endH - startH) * 60 + (endM - startM)) * (60/60), 30);
-                return { top: `${top}px`, height: `${height}px` };
-              };
-
-              const COLORS = ['#2874A6', '#8B6914', '#2D7A4F', '#9B59B6', '#E67E22', '#C0392B'];
-
+              const getEventStyle = (ev) => { const startH = ev.hora_inicio ? parseInt(ev.hora_inicio.split(':')[0]) : 8; const startM = ev.hora_inicio ? parseInt(ev.hora_inicio.split(':')[1]) : 0; const endH = ev.hora_fin ? parseInt(ev.hora_fin.split(':')[0]) : startH + 1; const endM = ev.hora_fin ? parseInt(ev.hora_fin.split(':')[1]) : 0; const top = ((startH - 8) * 60 + startM) * (60/60); const height = Math.max(((endH - startH) * 60 + (endM - startM)) * (60/60), 30); return { top: `${top}px`, height: `${height}px` }; };
               return (
                 <div style={{background:'var(--surface)',borderRadius:'var(--radius-lg)',border:'1px solid var(--border-light)',overflow:'hidden',boxShadow:'var(--shadow-sm)'}}>
                   <div style={{display:'grid',gridTemplateColumns:`80px repeat(${displayFormadores.length}, 1fr)`,borderBottom:'1px solid var(--border-light)',background:'var(--surface-alt)'}}>
                     <div style={{padding:'14px 12px',fontSize:'11px',fontWeight:600,textTransform:'uppercase',letterSpacing:'1px',color:'var(--text-muted)'}}>Hora</div>
-                    {displayFormadores.map((f, i) => {
-                      const fc = getFormadorColor(f.id);
-                      return (
-                        <div key={f.id} style={{padding:'14px 12px',textAlign:'center',borderLeft:'1px solid var(--border-light)'}}>
-                          <div style={{width:'28px',height:'28px',borderRadius:'50%',background:fc.border,display:'inline-flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:'12px',fontWeight:600,marginBottom:'4px'}}>{f.nombre?.charAt(0)}</div>
-                          <div style={{fontSize:'12px',fontWeight:600}}>{f.nombre}</div>
-                        </div>
-                      );
-                    })}
+                    {displayFormadores.map((f, i) => { const fc = getFormadorColor(f.id); return (<div key={f.id} style={{padding:'14px 12px',textAlign:'center',borderLeft:'1px solid var(--border-light)'}}><div style={{width:'28px',height:'28px',borderRadius:'50%',background:fc.border,display:'inline-flex',alignItems:'center',justifyContent:'center',color:'#fff',fontSize:'12px',fontWeight:600,marginBottom:'4px'}}>{f.nombre?.charAt(0)}</div><div style={{fontSize:'12px',fontWeight:600}}>{f.nombre}</div></div>); })}
                   </div>
                   <div style={{display:'grid',gridTemplateColumns:`80px repeat(${displayFormadores.length}, 1fr)`,position:'relative'}}>
-                    <div>
-                      {HOURS.map(h => (
-                        <div key={h} style={{height:'60px',padding:'4px 12px',fontSize:'11px',color:'var(--text-muted)',fontWeight:500,borderBottom:'1px solid var(--border-light)',display:'flex',alignItems:'flex-start'}}>{String(h).padStart(2,'0')}:00</div>
-                      ))}
-                    </div>
+                    <div>{HOURS.map(h => (<div key={h} style={{height:'60px',padding:'4px 12px',fontSize:'11px',color:'var(--text-muted)',fontWeight:500,borderBottom:'1px solid var(--border-light)',display:'flex',alignItems:'flex-start'}}>{String(h).padStart(2,'0')}:00</div>))}</div>
                     {displayFormadores.map((f, fi) => {
                       const fEvents = dayEvents.filter(e => e.formador_id === f.id);
-                      return (
-                        <div key={f.id} style={{position:'relative',borderLeft:'1px solid var(--border-light)'}}>
-                          {HOURS.map(h => (
-                            <div key={h} style={{height:'60px',borderBottom:'1px solid var(--border-light)'}}></div>
-                          ))}
-                          {fEvents.map(ev => {
-                            const pos = getEventStyle(ev);
-                            const fc = getFormadorColor(ev.formador_id);
-                            const estadoIcons = { planificada: '○', confirmada: '◉', realizada: '✓', cancelada: '✕' };
-                            return (
-                              <div key={ev.id} onClick={() => { setSelectedFormacion(ev); setShowDetail(true); }} style={{position:'absolute',top:pos.top,height:pos.height,left:'4px',right:'4px',background:fc.bg,borderLeft:`3px solid ${fc.border}`,borderRadius:'6px',padding:'6px 8px',cursor:'pointer',overflow:'hidden',fontSize:'11px',transition:'transform 0.1s ease',zIndex:2,color:fc.text}} onMouseEnter={e => e.currentTarget.style.transform='scale(1.02)'} onMouseLeave={e => e.currentTarget.style.transform='scale(1)'}>
-                                <div style={{fontWeight:600,fontSize:'11px'}}><span style={{opacity:0.6,marginRight:'4px'}}>{estadoIcons[ev.estado]}</span>{ev.hora_inicio?.slice(0,5)} – {ev.hora_fin?.slice(0,5)}</div>
-                                <div style={{fontWeight:500,marginTop:'2px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{ev.titulo}</div>
-                                {parseFloat(pos.height) > 50 && <div style={{fontSize:'10px',opacity:0.7,marginTop:'2px'}}>{ev.cadena}{ev.modalidad === 'virtual' ? ' 🖥️' : ''}</div>}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      );
+                      return (<div key={f.id} style={{position:'relative',borderLeft:'1px solid var(--border-light)'}}>
+                        {HOURS.map(h => (<div key={h} style={{height:'60px',borderBottom:'1px solid var(--border-light)'}}></div>))}
+                        {fEvents.map(ev => { const pos = getEventStyle(ev); const fc = getFormadorColor(ev.formador_id); const estadoIcons = { planificada: '○', confirmada: '◉', realizada: '✓', cancelada: '✕' };
+                          return (<div key={ev.id} onClick={() => { setSelectedFormacion(ev); setShowDetail(true); }} style={{position:'absolute',top:pos.top,height:pos.height,left:'4px',right:'4px',background:fc.bg,borderLeft:`3px solid ${fc.border}`,borderRadius:'6px',padding:'6px 8px',cursor:'pointer',overflow:'hidden',fontSize:'11px',transition:'transform 0.1s ease',zIndex:2,color:fc.text}} onMouseEnter={e => e.currentTarget.style.transform='scale(1.02)'} onMouseLeave={e => e.currentTarget.style.transform='scale(1)'}><div style={{fontWeight:600,fontSize:'11px'}}><span style={{opacity:0.6,marginRight:'4px'}}>{estadoIcons[ev.estado]}</span>{ev.hora_inicio?.slice(0,5)} – {ev.hora_fin?.slice(0,5)}</div><div style={{fontWeight:500,marginTop:'2px',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>{ev.titulo}</div>{parseFloat(pos.height) > 50 && <div style={{fontSize:'10px',opacity:0.7,marginTop:'2px'}}>{ev.cadena}{ev.modalidad === 'virtual' ? ' 🖥️' : ''}</div>}</div>);
+                        })}
+                      </div>);
                     })}
                   </div>
                 </div>
@@ -2217,15 +1382,10 @@ function App() {
           </div>
         )}
 
-        {/* STATS PAGE */}
         {page === 'estadisticas' && stats && (
           <div className="stats-container">
             <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:20}}>
-              <div className="calendar-nav">
-                <button className="btn btn-ghost btn-icon" onClick={() => navMonth(-1)}><Icons.ChevLeft /></button>
-                <div className="calendar-month">{MESES[month]} {year}</div>
-                <button className="btn btn-ghost btn-icon" onClick={() => navMonth(1)}><Icons.ChevRight /></button>
-              </div>
+              <div className="calendar-nav"><button className="btn btn-ghost btn-icon" onClick={() => navMonth(-1)}><Icons.ChevLeft /></button><div className="calendar-month">{MESES[month]} {year}</div><button className="btn btn-ghost btn-icon" onClick={() => navMonth(1)}><Icons.ChevRight /></button></div>
             </div>
             <div className="stats-grid">
               <div className="stat-card"><div className="stat-label">Total</div><div className="stat-value">{stats.total}</div><div className="stat-sub">formaciones</div></div>
@@ -2234,68 +1394,19 @@ function App() {
               <div className="stat-card"><div className="stat-label">Confirmadas</div><div className="stat-value" style={{color:'var(--confirmada)'}}>{stats.confirmadas}</div><div className="stat-sub">próximas</div></div>
               <div className="stat-card"><div className="stat-label">Canceladas</div><div className="stat-value" style={{color:'var(--cancelada)'}}>{stats.canceladas}</div><div className="stat-sub">{stats.total ? Math.round(stats.canceladas/stats.total*100) : 0}% del total</div></div>
             </div>
-
-            {stats.porFormador?.length > 0 && (
-              <div style={{marginTop:24}}>
-                <h3 style={{fontFamily:"'Playfair Display',serif",fontSize:18,marginBottom:14}}>Por Formador</h3>
-                <div className="table-wrapper">
-                  <table className="table">
-                    <thead><tr><th>Formador</th><th>Formaciones</th></tr></thead>
-                    <tbody>
-                      {stats.porFormador.map((pf, i) => (
-                        <tr key={i}><td>{pf.formador?.nombre || '—'}</td><td>{pf.dataValues?.total || pf.total}</td></tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            )}
-
-            {stats.porTipo?.length > 0 && (
-              <div style={{marginTop:24}}>
-                <h3 style={{fontFamily:"'Playfair Display',serif",fontSize:18,marginBottom:14}}>Por Tipo</h3>
-                <div className="table-wrapper">
-                  <table className="table">
-                    <thead><tr><th>Tipo</th><th>Cantidad</th></tr></thead>
-                    <tbody>
-                      {stats.porTipo.map((pt, i) => (
-                        <tr key={i}><td>{TIPOS[pt.tipo] || pt.tipo}</td><td>{pt.dataValues?.total || pt.total}</td></tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            )}
+            {stats.porFormador?.length > 0 && (<div style={{marginTop:24}}><h3 style={{fontFamily:"'Playfair Display',serif",fontSize:18,marginBottom:14}}>Por Formador</h3><div className="table-wrapper"><table className="table"><thead><tr><th>Formador</th><th>Formaciones</th></tr></thead><tbody>{stats.porFormador.map((pf, i) => (<tr key={i}><td>{pf.formador?.nombre || '—'}</td><td>{pf.dataValues?.total || pf.total}</td></tr>))}</tbody></table></div></div>)}
+            {stats.porTipo?.length > 0 && (<div style={{marginTop:24}}><h3 style={{fontFamily:"'Playfair Display',serif",fontSize:18,marginBottom:14}}>Por Tipo</h3><div className="table-wrapper"><table className="table"><thead><tr><th>Tipo</th><th>Cantidad</th></tr></thead><tbody>{stats.porTipo.map((pt, i) => (<tr key={i}><td>{TIPOS[pt.tipo] || pt.tipo}</td><td>{pt.dataValues?.total || pt.total}</td></tr>))}</tbody></table></div></div>)}
           </div>
         )}
 
-        {/* TEAM PAGE */}
         {page === 'equipo' && user.rol === 'admin' && (
           <div className="users-container">
-            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:20}}>
-              <h3 style={{fontFamily:"'Playfair Display',serif",fontSize:18}}>Equipo de Formadores</h3>
-              <button className="btn btn-primary" onClick={() => setShowUserModal(true)}><Icons.Plus /> Nuevo Usuario</button>
-            </div>
-            <div className="table-wrapper">
-              <table className="table">
-                <thead><tr><th>Nombre</th><th>Email</th><th>Rol</th><th>Estado</th></tr></thead>
-                <tbody>
-                  {users.map(u => (
-                    <tr key={u.id}>
-                      <td style={{fontWeight:500}}>{u.nombre}</td>
-                      <td>{u.email}</td>
-                      <td><span className={`role-badge ${u.rol}`}>{u.rol}</span></td>
-                      <td>{u.activo ? '✓ Activo' : '✗ Inactivo'}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:20}}><h3 style={{fontFamily:"'Playfair Display',serif",fontSize:18}}>Equipo de Formadores</h3><button className="btn btn-primary" onClick={() => setShowUserModal(true)}><Icons.Plus /> Nuevo Usuario</button></div>
+            <div className="table-wrapper"><table className="table"><thead><tr><th>Nombre</th><th>Email</th><th>Rol</th><th>Estado</th></tr></thead><tbody>{users.map(u => (<tr key={u.id}><td style={{fontWeight:500}}>{u.nombre}</td><td>{u.email}</td><td><span className={`role-badge ${u.rol}`}>{u.rol}</span></td><td>{u.activo ? '✓ Activo' : '✗ Inactivo'}</td></tr>))}</tbody></table></div>
           </div>
         )}
       </div>
 
-      {/* Modals */}
       <FormacionModal show={showModal} onClose={() => { setShowModal(false); setEditingFormacion(null); }} onSave={handleSaveFormacion} formacion={editingFormacion} users={users} currentUser={user} />
       <DetailModal show={showDetail} formacion={selectedFormacion} onClose={() => setShowDetail(false)} onEdit={openEdit} onDelete={handleDelete} onUploadFotos={handleUploadFotos} currentUser={user} />
       <UserModal show={showUserModal} onClose={() => setShowUserModal(false)} onSave={handleCreateUser} />
